@@ -2,10 +2,10 @@
 #include "cgg/Vec2.h"
 
 //------------------------------------------------------------------------------------------------------------------------------------
-/// \name   KEYBOARD FUNCTIONS
-/// \brief  The following functions control the window properties
+// KEYBOARD FUNCTIONS
 //------------------------------------------------------------------------------------------------------------------------------------
 
+/// Various keycodes that don't naturally map to a char (unlike say 'a' or '1' or ':')
 enum 
 {
   kKeyEnter = 13,
@@ -50,8 +50,8 @@ bool isAltPressed();
 bool isCtrlPressed();
 
 //------------------------------------------------------------------------------------------------------------------------------------
-/// \name   WINDOW FUNCTIONS
-/// \brief  The following functions control the window properties
+// WINDOW FUNCTIONS
+// The following functions control the window properties
 //------------------------------------------------------------------------------------------------------------------------------------
 
 /// \brief  returns the window width
@@ -82,9 +82,9 @@ Vec2 getScreenCoordinates(int x, int y);
 ///         getScreenCoordinates function can be used to 
 void setScreenCoordinates(float minx, float maxx, float miny, float maxy);
 
+//------------------------------------------------------------------------------------------------------------------------------------
+// MAIN ENTRY POINT
+//------------------------------------------------------------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------------------------------------------------------------
-/// \name   MAIN ENTRY POINT
 /// \brief  Call this from main to run the app
-//------------------------------------------------------------------------------------------------------------------------------------
 int runApp();

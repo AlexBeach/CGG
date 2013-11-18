@@ -19,7 +19,7 @@ float g_time = 0;
 //------------------------------------------------------------------------------------------------------------------------------------
 void init()
 {
-  setWindowTitle("Click to add. Ctrl + Click to remove");
+	setWindowTitle("Click to add. Ctrl + Click to remove");
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -42,25 +42,25 @@ void draw3D()
 //------------------------------------------------------------------------------------------------------------------------------------
 void draw()
 {
-  setColour(1.0f, 0.0f, 0.0f);
+	setColour(1.0f, 0.0f, 0.0f);
 
-  // iterate over each element in the array
-  for(size_t i = 0; i < g_points.size(); ++i)
-  {
-    drawPoint(g_points[i]);
-  }
+	// iterate over each element in the array
+	for(size_t i = 0; i < g_points.size(); ++i)
+	{
+		drawPoint(g_points[i]);
+	}
 
-  // draw a little blue crosshair when we are dragging the mouse
-  if(g_mouseIsDragging)
-  {
-    setColour(0.0f, 0.0f, 1.0f);
-    Vec2 minx = g_currPoint - Vec2(0.5f, 0);
-    Vec2 maxx = g_currPoint + Vec2(0.5f, 0);
-    Vec2 miny = g_currPoint - Vec2(0, 0.5f);
-    Vec2 maxy = g_currPoint + Vec2(0, 0.5f);
-    drawLine(minx, maxx);
-    drawLine(miny, maxy);
-  }
+	// draw a little blue crosshair when we are dragging the mouse
+	if(g_mouseIsDragging)
+	{
+		setColour(0.0f, 0.0f, 1.0f);
+		Vec2 minx = g_currPoint - Vec2(0.5f, 0);
+		Vec2 maxx = g_currPoint + Vec2(0.5f, 0);
+		Vec2 miny = g_currPoint - Vec2(0, 0.5f);
+		Vec2 maxy = g_currPoint + Vec2(0, 0.5f);
+		drawLine(minx, maxx);
+		drawLine(miny, maxy);
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -68,30 +68,30 @@ void draw()
 //------------------------------------------------------------------------------------------------------------------------------------
 void mousePress(int x, int y)
 {
-  // convert the mouse click into screen coordinates
+	// convert the mouse click into screen coordinates
 	Vec2 p = getScreenCoordinates(x, y);
-  
-  // There are a few 'meta' keys than can be recieved when a mouse click occurs. In this case, I'm just looking for control.
-  // Shift is also available (isShiftPressed), as is Alt (isAltPressed). Currently mouse messages when alt is pressed are intercepted 
-  // by my Maya camera code (so you wont be able to recieve them!). If you need these Alt+mouse messages, then you will have to disable 
-  // the maya camera (i.e. call disableMayaCamera()).
-  if(isCtrlPressed())
-  {
-    // and we have some points in the array
-    if(g_points.size())
-    {
-      // remove the last point
-      g_points.pop_back();
-    }
-  }
-  else
-  {
-    // otherwise, store the current point
-    g_currPoint = p;
 
-    // and set a flag to make sure we know we're dragging
-    g_mouseIsDragging = true;
-  }
+	// There are a few 'meta' keys than can be recieved when a mouse click occurs. In this case, I'm just looking for control.
+	// Shift is also available (isShiftPressed), as is Alt (isAltPressed). Currently mouse messages when alt is pressed are intercepted 
+	// by my Maya camera code (so you wont be able to recieve them!). If you need these Alt+mouse messages, then you will have to disable 
+	// the maya camera (i.e. call disableMayaCamera()).
+	if(isCtrlPressed())
+	{
+		// and we have some points in the array
+		if(g_points.size())
+		{
+			// remove the last point
+			g_points.pop_back();
+		}
+	}
+	else
+	{
+		// otherwise, store the current point
+		g_currPoint = p;
+
+		// and set a flag to make sure we know we're dragging
+		g_mouseIsDragging = true;
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -100,16 +100,16 @@ void mousePress(int x, int y)
 void mouseRelease(int x, int y)
 {
 	Vec2 p = getScreenCoordinates(x, y);
-  
-  // when the mouse is released, if we are dragging the mouse...
-  if(g_mouseIsDragging)
-  {
-    // add the point to the back of the point array
-    g_points.push_back(p);
 
-    // turn off dragging
-    g_mouseIsDragging = false;
-  }
+	// when the mouse is released, if we are dragging the mouse...
+	if(g_mouseIsDragging)
+	{
+		// add the point to the back of the point array
+		g_points.push_back(p);
+
+		// turn off dragging
+		g_mouseIsDragging = false;
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -119,12 +119,12 @@ void mouseMove(int x, int y)
 {
 	Vec2 p = getScreenCoordinates(x, y);
 
-  // if dragging...
-  if(g_mouseIsDragging)
-  {
-    // update current position
-    g_currPoint = p;
-  }
+	// if dragging...
+	if(g_mouseIsDragging)
+	{
+		// update current position
+		g_currPoint = p;
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -132,6 +132,6 @@ void mouseMove(int x, int y)
 //------------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
-  // just run the app.... 
-  return runApp();
+	// just run the app.... 
+	return runApp();
 }

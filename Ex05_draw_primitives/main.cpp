@@ -5,34 +5,34 @@ float g_time = 0;
 
 Vec3 g_pointsV[] = 
 {
-  Vec3(-1.0f, -1.0f, 0.0f),
-  Vec3( 1.0f, -1.0f, 0.0f),
-  Vec3( 1.0f,  1.0f, 0.0f),
-  Vec3(-1.0f,  1.0f, 0.0f)
+	Vec3(-1.0f, -1.0f, 0.0f),
+	Vec3( 1.0f, -1.0f, 0.0f),
+	Vec3( 1.0f,  1.0f, 0.0f),
+	Vec3(-1.0f,  1.0f, 0.0f)
 };
 
 VertexNormal g_pointsVN[] = 
 {
-  { Vec3(-1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
-  { Vec3( 1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
-  { Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
-  { Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) }
+	{ Vec3(-1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
+	{ Vec3( 1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
+	{ Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
+	{ Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) }
 };
 
 VertexColour g_pointsVC[] = 
 {
-  { Vec3(-1.0f, -1.0f, 0.0f), Vec3(1.0f, 1.0f, 0.0f) },
-  { Vec3( 1.0f, -1.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f) },
-  { Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 1.0f, 0.0f) },
-  { Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) }
+	{ Vec3(-1.0f, -1.0f, 0.0f), Vec3(1.0f, 1.0f, 0.0f) },
+	{ Vec3( 1.0f, -1.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f) },
+	{ Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 1.0f, 0.0f) },
+	{ Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) }
 };
 
 VertexNormalColour g_pointsVNC[] = 
 {
-  { Vec3(-1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(1.0f, 1.0f, 0.0f) },
-  { Vec3( 1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(1.0f, 0.0f, 0.0f) },
-  { Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 1.0f, 0.0f) },
-  { Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) }
+	{ Vec3(-1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(1.0f, 1.0f, 0.0f) },
+	{ Vec3( 1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(1.0f, 0.0f, 0.0f) },
+	{ Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 1.0f, 0.0f) },
+	{ Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) }
 };
 
 
@@ -68,28 +68,29 @@ void draw3D()
 		drawLine(zmin, zmax);
 	}
 
-  pushMatrix();
-    translate(-8.0f, 0, 0);
-    drawPrimitives(g_pointsV, 4, kQuads);
-  popMatrix();
-  
-  pushMatrix();
-    translate(-3.0f, 0, 0);
-    drawPrimitives(g_pointsVC, 4, kQuads);
-  popMatrix();
-  
-  enableLighting();
-	setColour(1.0f, 1.0f, 1.0f);
-  pushMatrix();
-    translate(3.0f, 0, 0);
-    drawPrimitives(g_pointsVN, 4, kQuads);
-  popMatrix();
-  
-  pushMatrix();
-    translate(8.0f, 0, 0);
-    drawPrimitives(g_pointsVNC, 4, kQuads);
-  popMatrix();
-  disableLighting();
+	pushMatrix();
+		translate(-8.0f, 0, 0);
+		drawPrimitives(g_pointsV, 4, kQuads);
+	popMatrix();
+
+	pushMatrix();
+		translate(-3.0f, 0, 0);
+		drawPrimitives(g_pointsVC, 4, kQuads);
+	popMatrix();
+
+	enableLighting();
+		setColour(1.0f, 1.0f, 1.0f);
+
+		pushMatrix();
+			translate(3.0f, 0, 0);
+			drawPrimitives(g_pointsVN, 4, kQuads);
+		popMatrix();
+
+		pushMatrix();
+			translate(8.0f, 0, 0);
+			drawPrimitives(g_pointsVNC, 4, kQuads);
+		popMatrix();
+	disableLighting();
 
 }
 
@@ -129,6 +130,6 @@ void mouseMove(int x, int y)
 //------------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
-  // just run the app.... 
-  return runApp();
+	// just run the app.... 
+	return runApp();
 }

@@ -11,41 +11,41 @@ float g_angle2 = 0;
 // vertex normals for a box
 VertexNormal g_pointsVN[] = 
 {
-  // +ve Z
-  { Vec3(-0.3f, -1.0f, 0.3f), Vec3(0.0f, 0.0f, 1.0f) },
-  { Vec3( 0.3f, -1.0f, 0.3f), Vec3(0.0f, 0.0f, 1.0f) },
-  { Vec3( 0.3f,  0.0f, 0.3f), Vec3(0.0f, 0.0f, 1.0f) },
-  { Vec3(-0.3f,  0.0f, 0.3f), Vec3(0.0f, 0.0f, 1.0f) },
-  
-  // -ve Z
-  { Vec3(-0.3f,  0.0f, -0.3f), Vec3(0.0f, 0.0f, -1.0f) },
-  { Vec3( 0.3f,  0.0f, -0.3f), Vec3(0.0f, 0.0f, -1.0f) },
-  { Vec3( 0.3f, -1.0f, -0.3f), Vec3(0.0f, 0.0f, -1.0f) },
-  { Vec3(-0.3f, -1.0f, -0.3f), Vec3(0.0f, 0.0f, -1.0f) },
-  
-  // +ve Y
-  { Vec3(-0.3f, 0.0f,-0.3f), Vec3(0.0f, 1.0f, 0.0f) },
-  { Vec3(-0.3f, 0.0f, 0.3f), Vec3(0.0f, 1.0f, 0.0f) },
-  { Vec3( 0.3f, 0.0f, 0.3f), Vec3(0.0f, 1.0f, 0.0f) },
-  { Vec3( 0.3f, 0.0f,-0.3f), Vec3(0.0f, 1.0f, 0.0f) },
-  
-  // -ve Y
-  { Vec3( 0.3f, -1.0f, -0.3f), Vec3(0.0f, -1.0f, 0.0f) },
-  { Vec3( 0.3f, -1.0f,  0.3f), Vec3(0.0f, -1.0f, 0.0f) },
-  { Vec3(-0.3f, -1.0f,  0.3f), Vec3(0.0f, -1.0f, 0.0f) },
-  { Vec3(-0.3f, -1.0f, -0.3f), Vec3(0.0f, -1.0f, 0.0f) },
-  
-  // +ve X
-  { Vec3(0.3f, -1.0f,-0.3f), Vec3(1.0f, 0.0f, 0.0f) },
-  { Vec3(0.3f, -1.0f, 0.3f), Vec3(1.0f, 0.0f, 0.0f) },
-  { Vec3(0.3f,  0.0f, 0.3f), Vec3(1.0f, 0.0f, 0.0f) },
-  { Vec3(0.3f,  0.0f,-0.3f), Vec3(1.0f, 0.0f, 0.0f) },
-  
-  // -ve X
-  { Vec3(-0.3f,  0.0f, -0.3f), Vec3(-1.0f, 0.0f, 0.0f) },
-  { Vec3(-0.3f,  0.0f,  0.3f), Vec3(-1.0f, 0.0f, 0.0f) },
-  { Vec3(-0.3f, -1.0f,  0.3f), Vec3(-1.0f, 0.0f, 0.0f) },
-  { Vec3(-0.3f, -1.0f, -0.3f), Vec3(-1.0f, 0.0f, 0.0f) }
+	// +ve Z
+	{ Vec3(-0.3f, -1.0f, 0.3f), Vec3(0.0f, 0.0f, 1.0f) },
+	{ Vec3( 0.3f, -1.0f, 0.3f), Vec3(0.0f, 0.0f, 1.0f) },
+	{ Vec3( 0.3f,  0.0f, 0.3f), Vec3(0.0f, 0.0f, 1.0f) },
+	{ Vec3(-0.3f,  0.0f, 0.3f), Vec3(0.0f, 0.0f, 1.0f) },
+
+	// -ve Z
+	{ Vec3(-0.3f,  0.0f, -0.3f), Vec3(0.0f, 0.0f, -1.0f) },
+	{ Vec3( 0.3f,  0.0f, -0.3f), Vec3(0.0f, 0.0f, -1.0f) },
+	{ Vec3( 0.3f, -1.0f, -0.3f), Vec3(0.0f, 0.0f, -1.0f) },
+	{ Vec3(-0.3f, -1.0f, -0.3f), Vec3(0.0f, 0.0f, -1.0f) },
+
+	// +ve Y
+	{ Vec3(-0.3f, 0.0f,-0.3f), Vec3(0.0f, 1.0f, 0.0f) },
+	{ Vec3(-0.3f, 0.0f, 0.3f), Vec3(0.0f, 1.0f, 0.0f) },
+	{ Vec3( 0.3f, 0.0f, 0.3f), Vec3(0.0f, 1.0f, 0.0f) },
+	{ Vec3( 0.3f, 0.0f,-0.3f), Vec3(0.0f, 1.0f, 0.0f) },
+
+	// -ve Y
+	{ Vec3( 0.3f, -1.0f, -0.3f), Vec3(0.0f, -1.0f, 0.0f) },
+	{ Vec3( 0.3f, -1.0f,  0.3f), Vec3(0.0f, -1.0f, 0.0f) },
+	{ Vec3(-0.3f, -1.0f,  0.3f), Vec3(0.0f, -1.0f, 0.0f) },
+	{ Vec3(-0.3f, -1.0f, -0.3f), Vec3(0.0f, -1.0f, 0.0f) },
+
+	// +ve X
+	{ Vec3(0.3f, -1.0f,-0.3f), Vec3(1.0f, 0.0f, 0.0f) },
+	{ Vec3(0.3f, -1.0f, 0.3f), Vec3(1.0f, 0.0f, 0.0f) },
+	{ Vec3(0.3f,  0.0f, 0.3f), Vec3(1.0f, 0.0f, 0.0f) },
+	{ Vec3(0.3f,  0.0f,-0.3f), Vec3(1.0f, 0.0f, 0.0f) },
+
+	// -ve X
+	{ Vec3(-0.3f,  0.0f, -0.3f), Vec3(-1.0f, 0.0f, 0.0f) },
+	{ Vec3(-0.3f,  0.0f,  0.3f), Vec3(-1.0f, 0.0f, 0.0f) },
+	{ Vec3(-0.3f, -1.0f,  0.3f), Vec3(-1.0f, 0.0f, 0.0f) },
+	{ Vec3(-0.3f, -1.0f, -0.3f), Vec3(-1.0f, 0.0f, 0.0f) }
 };
 
 
@@ -54,7 +54,7 @@ VertexNormal g_pointsVN[] =
 //------------------------------------------------------------------------------------------------------------------------------------
 void init()
 {
-  setWindowTitle("Controls: Q/A - Angle0. W/S - Angle 2. E/D - Angle 3.");
+	setWindowTitle("Controls: Q/A - Angle0. W/S - Angle 2. E/D - Angle 3.");
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -64,14 +64,14 @@ void update(float dt)
 {
 	g_time += dt;
 
-  // modify the angle if any keys are pressed
-  float angular_speed = dt * PI;
-  if(isKeyPressed('q')) g_angle0 += angular_speed;
-  if(isKeyPressed('a')) g_angle0 -= angular_speed;
-  if(isKeyPressed('w')) g_angle1 += angular_speed;
-  if(isKeyPressed('s')) g_angle1 -= angular_speed;
-  if(isKeyPressed('e')) g_angle2 += angular_speed;
-  if(isKeyPressed('d')) g_angle2 -= angular_speed;
+	// modify the angle if any keys are pressed
+	float angular_speed = dt * PI;
+	if(isKeyPressed('q')) g_angle0 += angular_speed;
+	if(isKeyPressed('a')) g_angle0 -= angular_speed;
+	if(isKeyPressed('w')) g_angle1 += angular_speed;
+	if(isKeyPressed('s')) g_angle1 -= angular_speed;
+	if(isKeyPressed('e')) g_angle2 += angular_speed;
+	if(isKeyPressed('d')) g_angle2 -= angular_speed;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -91,54 +91,54 @@ void draw3D()
 		drawLine(zmin, zmax);
 	}
 
-  enableLighting();
-  
-  // the axis each segment will rotate around
-  Vec3 z_axis(0, 0, 1.0f);
+	enableLighting();
 
-  // push a new matrix onto the stack (for the first segment)
-  pushMatrix();
-  {
-    // rotate by the angle 0
-    rotate(g_angle0, z_axis);
+	// the axis each segment will rotate around
+	Vec3 z_axis(0, 0, 1.0f);
 
-    // draw the box
-    setColour(1.0f, 0.0f, 0.0f);
-    drawPrimitives(g_pointsVN, 24, kQuads);
+	// push a new matrix onto the stack (for the first segment)
+	pushMatrix();
+	{
+		// rotate by the angle 0
+		rotate(g_angle0, z_axis);
 
-    // push a new matrix onto the stack (for the second segment)
-    pushMatrix();
-    {
-      // move down a bit (this only affects the 2nd and 3rd segments)
-      translate(0, -1.0f, 0);
-    
-      // rotate by the second angle
-      rotate(g_angle1, z_axis);
-      
-      // draw the third box
-      setColour(0.0f, 1.0f, 0.0f);
-      drawPrimitives(g_pointsVN, 24, kQuads);
+		// draw the box
+		setColour(1.0f, 0.0f, 0.0f);
+		drawPrimitives(g_pointsVN, 24, kQuads);
 
-      // push a new matrix onto the stack (for the third segment)
-      pushMatrix();
-      {
-        // move down a bit (this only affects the 3rd segments)
-        translate(0, -1.0f, 0);
-      
-        // rotate by the third angle
-        rotate(g_angle2, z_axis); 
-        
-        // draw the box
-        setColour(0.0f, 0.0f, 1.0f);
-        drawPrimitives(g_pointsVN, 24, kQuads);
-      }
-      popMatrix();
-    }
-    popMatrix();
-  }
-  popMatrix();
+		// push a new matrix onto the stack (for the second segment)
+		pushMatrix();
+		{
+			// move down a bit (this only affects the 2nd and 3rd segments)
+			translate(0, -1.0f, 0);
 
-  disableLighting();
+			// rotate by the second angle
+			rotate(g_angle1, z_axis);
+
+			// draw the third box
+			setColour(0.0f, 1.0f, 0.0f);
+			drawPrimitives(g_pointsVN, 24, kQuads);
+
+			// push a new matrix onto the stack (for the third segment)
+			pushMatrix();
+			{
+				// move down a bit (this only affects the 3rd segments)
+				translate(0, -1.0f, 0);
+
+				// rotate by the third angle
+				rotate(g_angle2, z_axis); 
+
+				// draw the box
+				setColour(0.0f, 0.0f, 1.0f);
+				drawPrimitives(g_pointsVN, 24, kQuads);
+			}
+			popMatrix();
+		}
+		popMatrix();
+	}
+	popMatrix();
+
+	disableLighting();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -177,6 +177,6 @@ void mouseMove(int x, int y)
 //------------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
-  // just run the app.... 
-  return runApp();
+	// just run the app.... 
+	return runApp();
 }

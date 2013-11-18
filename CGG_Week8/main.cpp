@@ -1,6 +1,7 @@
 #include "cgg/Graphics.h"
 #include <iostream>
 
+// global time value (since program started)
 float g_time = 0;
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -8,15 +9,12 @@ float g_time = 0;
 //------------------------------------------------------------------------------------------------------------------------------------
 void init()
 {
-  // give our app a title 
-  setWindowTitle("Hello App World!");
+	// sets the size of the 2D screen coordinates. I'm just initialising the defaults here. You can use whatever you want!
+	// args are: minx, maxx, miny, maxy
+	setScreenCoordinates(-20.0f, 20.0f, -15.0f, 15.0f);
 
-  // sets the size of the 2D screen coordinates. I'm just initialising the defaults here. You can use whatever you want!
-  // args are: minx, maxx, miny, maxy
-  setScreenCoordinates(-20.0f, 20.0f, -15.0f, 15.0f);
-
-  // setting the background colour to a default grey!
-  setBackgroundColour(0.6f, 0.6f, 0.7f);
+	// setting the background colour to a default grey!
+	setBackgroundColour(0.6f, 0.6f, 0.7f);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -25,6 +23,30 @@ void init()
 void update(float dt)
 {
 	g_time += dt;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+// generates a plane using parametric values 'u' and 'v'
+//------------------------------------------------------------------------------------------------------------------------------------
+void drawParametricSurface()
+{
+	// the min/max parametric values for the surface
+	float umin = -12.0f;
+	float umax =  12.0f;
+	float vmin = -12.0f;
+	float vmax =  12.0f;
+
+	for(float u = umin; u <= umax; u += 0.05f)
+	{
+		for(float v = vmin; v <= vmax; v += 0.05f)
+		{
+			Vec3 P;
+			P.x = u;
+			P.z = v;
+			P.y = 0;
+			drawPoint(P);
+		}
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -43,6 +65,10 @@ void draw3D()
 		drawLine(xmin, xmax);
 		drawLine(zmin, zmax);
 	}
+
+	// draws te plane
+	setColour(0.25f, 0.25f, 1.0f);
+	drawParametricSurface();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -50,16 +76,16 @@ void draw3D()
 //------------------------------------------------------------------------------------------------------------------------------------
 void draw()
 {
-  // draw something in 2D just so you can see it does actually work!
-  setColour(0.1f, 0.1f, 0.9f);
-  Vec2 topLeft(-19.5f, 14.5f);
-  Vec2 topRight(19.5f, 14.5f);
-  Vec2 bottomLeft(-19.5f, -14.5f);
-  Vec2 bottomRight(19.5f, -14.5f);
-  drawLine(topLeft, topRight);
-  drawLine(topRight, bottomRight);
-  drawLine(bottomRight, bottomLeft);
-  drawLine(bottomLeft, topLeft);
+	// draw something in 2D just so you can see it does actually work!
+	setColour(0.1f, 0.1f, 0.9f);
+	Vec2 topLeft(-19.5f, 14.5f);
+	Vec2 topRight(19.5f, 14.5f);
+	Vec2 bottomLeft(-19.5f, -14.5f);
+	Vec2 bottomRight(19.5f, -14.5f);
+	drawLine(topLeft, topRight);
+	drawLine(topRight, bottomRight);
+	drawLine(bottomRight, bottomLeft);
+	drawLine(bottomLeft, topLeft);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -91,6 +117,6 @@ void mouseMove(int x, int y)
 //------------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
-  // just run the app.... 
-  return runApp();
+	// just run the app....
+	return runApp();
 }

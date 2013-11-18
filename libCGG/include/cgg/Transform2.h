@@ -1,6 +1,7 @@
 #pragma once
 #include "cgg/Matrix2.h"
 
+/// a class that represents a 2D transformation. Can be coverted to/from a matrix2
 struct Transform2
 {
   float rotate;   ///< the rotation angle

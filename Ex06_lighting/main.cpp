@@ -39,41 +39,41 @@ float g_timer = 0;
 //
 VertexNormal g_pointsVN[] = 
 {
-  // +ve Z
-  { Vec3(-1.0f, -1.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) },
-  { Vec3( 1.0f, -1.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) },
-  { Vec3( 1.0f,  1.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) },
-  { Vec3(-1.0f,  1.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) },
-  
-  // -ve Z
-  { Vec3(-1.0f,  1.0f, -1.0f), Vec3(0.0f, 0.0f, -1.0f) },
-  { Vec3( 1.0f,  1.0f, -1.0f), Vec3(0.0f, 0.0f, -1.0f) },
-  { Vec3( 1.0f, -1.0f, -1.0f), Vec3(0.0f, 0.0f, -1.0f) },
-  { Vec3(-1.0f, -1.0f, -1.0f), Vec3(0.0f, 0.0f, -1.0f) },
-  
-  // +ve Y
-  { Vec3(-1.0f, 1.0f,-1.0f), Vec3(0.0f, 1.0f, 0.0f) },
-  { Vec3(-1.0f, 1.0f, 1.0f), Vec3(0.0f, 1.0f, 0.0f) },
-  { Vec3( 1.0f, 1.0f, 1.0f), Vec3(0.0f, 1.0f, 0.0f) },
-  { Vec3( 1.0f, 1.0f,-1.0f), Vec3(0.0f, 1.0f, 0.0f) },
-  
-  // -ve Y
-  { Vec3( 1.0f, -1.0f, -1.0f), Vec3(0.0f, -1.0f, 0.0f) },
-  { Vec3( 1.0f, -1.0f,  1.0f), Vec3(0.0f, -1.0f, 0.0f) },
-  { Vec3(-1.0f, -1.0f,  1.0f), Vec3(0.0f, -1.0f, 0.0f) },
-  { Vec3(-1.0f, -1.0f, -1.0f), Vec3(0.0f, -1.0f, 0.0f) },
-  
-  // +ve X
-  { Vec3(1.0f, -1.0f,-1.0f), Vec3(1.0f, 0.0f, 0.0f) },
-  { Vec3(1.0f, -1.0f, 1.0f), Vec3(1.0f, 0.0f, 0.0f) },
-  { Vec3(1.0f,  1.0f, 1.0f), Vec3(1.0f, 0.0f, 0.0f) },
-  { Vec3(1.0f,  1.0f,-1.0f), Vec3(1.0f, 0.0f, 0.0f) },
-  
-  // -ve X
-  { Vec3(-1.0f,  1.0f, -1.0f), Vec3(-1.0f, 0.0f, 0.0f) },
-  { Vec3(-1.0f,  1.0f,  1.0f), Vec3(-1.0f, 0.0f, 0.0f) },
-  { Vec3(-1.0f, -1.0f,  1.0f), Vec3(-1.0f, 0.0f, 0.0f) },
-  { Vec3(-1.0f, -1.0f, -1.0f), Vec3(-1.0f, 0.0f, 0.0f) }
+	// +ve Z
+	{ Vec3(-1.0f, -1.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) },
+	{ Vec3( 1.0f, -1.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) },
+	{ Vec3( 1.0f,  1.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) },
+	{ Vec3(-1.0f,  1.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) },
+
+	// -ve Z
+	{ Vec3(-1.0f,  1.0f, -1.0f), Vec3(0.0f, 0.0f, -1.0f) },
+	{ Vec3( 1.0f,  1.0f, -1.0f), Vec3(0.0f, 0.0f, -1.0f) },
+	{ Vec3( 1.0f, -1.0f, -1.0f), Vec3(0.0f, 0.0f, -1.0f) },
+	{ Vec3(-1.0f, -1.0f, -1.0f), Vec3(0.0f, 0.0f, -1.0f) },
+
+	// +ve Y
+	{ Vec3(-1.0f, 1.0f,-1.0f), Vec3(0.0f, 1.0f, 0.0f) },
+	{ Vec3(-1.0f, 1.0f, 1.0f), Vec3(0.0f, 1.0f, 0.0f) },
+	{ Vec3( 1.0f, 1.0f, 1.0f), Vec3(0.0f, 1.0f, 0.0f) },
+	{ Vec3( 1.0f, 1.0f,-1.0f), Vec3(0.0f, 1.0f, 0.0f) },
+
+	// -ve Y
+	{ Vec3( 1.0f, -1.0f, -1.0f), Vec3(0.0f, -1.0f, 0.0f) },
+	{ Vec3( 1.0f, -1.0f,  1.0f), Vec3(0.0f, -1.0f, 0.0f) },
+	{ Vec3(-1.0f, -1.0f,  1.0f), Vec3(0.0f, -1.0f, 0.0f) },
+	{ Vec3(-1.0f, -1.0f, -1.0f), Vec3(0.0f, -1.0f, 0.0f) },
+
+	// +ve X
+	{ Vec3(1.0f, -1.0f,-1.0f), Vec3(1.0f, 0.0f, 0.0f) },
+	{ Vec3(1.0f, -1.0f, 1.0f), Vec3(1.0f, 0.0f, 0.0f) },
+	{ Vec3(1.0f,  1.0f, 1.0f), Vec3(1.0f, 0.0f, 0.0f) },
+	{ Vec3(1.0f,  1.0f,-1.0f), Vec3(1.0f, 0.0f, 0.0f) },
+
+	// -ve X
+	{ Vec3(-1.0f,  1.0f, -1.0f), Vec3(-1.0f, 0.0f, 0.0f) },
+	{ Vec3(-1.0f,  1.0f,  1.0f), Vec3(-1.0f, 0.0f, 0.0f) },
+	{ Vec3(-1.0f, -1.0f,  1.0f), Vec3(-1.0f, 0.0f, 0.0f) },
+	{ Vec3(-1.0f, -1.0f, -1.0f), Vec3(-1.0f, 0.0f, 0.0f) }
 };
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ VertexNormal g_pointsVN[] =
 //------------------------------------------------------------------------------------------------------------------------------------
 void init()
 {
-  setWindowTitle("'N' toggles display of normals. 'L' toggles GPU/manual lighting calculation");
+	setWindowTitle("'N' toggles display of normals. 'L' toggles GPU/manual lighting calculation");
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -91,16 +91,16 @@ void update(float dt)
 {
 	g_timer += dt;
 
-  if(g_timer > 0.5f && isKeyPressed('n')) 
-  {
-    g_timer = 0;
-    g_displayNormals = !g_displayNormals;
-  }
-  if(g_timer > 0.5f && isKeyPressed('l')) 
-  {
-    g_timer = 0;
-    g_manualLighting = !g_manualLighting;
-  }
+	if(g_timer > 0.5f && isKeyPressed('n')) 
+	{
+		g_timer = 0;
+		g_displayNormals = !g_displayNormals;
+	}
+	if(g_timer > 0.5f && isKeyPressed('l')) 
+	{
+		g_timer = 0;
+		g_manualLighting = !g_manualLighting;
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -119,78 +119,78 @@ void draw3D()
 		drawLine(xmin, xmax);
 		drawLine(zmin, zmax);
 	}
-  
-  // If using the GPU to compute the lighting (which is what you want to do!)
-  if(!g_manualLighting)
-  {
-    // turn on lighting
-    enableLighting();
 
-      // set the diffuse material colour (this will be modulated by the effect of the lighting)
-	    setColour(1.0f, 1.0f, 1.0f);
+	// If using the GPU to compute the lighting (which is what you want to do!)
+	if(!g_manualLighting)
+	{
+		// turn on lighting
+		enableLighting();
 
-      // draw the cube geometry
-      drawPrimitives(g_pointsVN, 24, kQuads);
+		// set the diffuse material colour (this will be modulated by the effect of the lighting)
+		setColour(1.0f, 1.0f, 1.0f);
 
-    // turn off lighting
-    disableLighting();
-  }
-  else
-  {
-    // otherwise, compute the lighting manually. Don't ever do this in practice! It's insane! (But it may be useful for educational purposes)
+		// draw the cube geometry
+		drawPrimitives(g_pointsVN, 24, kQuads);
 
-    // The direction from the vertex to the light (effectively sunlight in this case!).
-    Vec3 L(-0.6f, 1.0f, -0.2f);
+		// turn off lighting
+		disableLighting();
+	}
+	else
+	{
+		// otherwise, compute the lighting manually. Don't ever do this in practice! It's insane! (But it may be useful for educational purposes)
 
-    // make sure L has been normalised!
-    L = normalize(L);
-    
-    // start drawing some quads
-    begin(kQuads);
+		// The direction from the vertex to the light (effectively sunlight in this case!).
+		Vec3 L(-0.6f, 1.0f, -0.2f);
 
-    // loop through each vertex normal
-    for(int i = 0; i < 24; ++i)
-    {
-      // compute N.L
-      // Make sure we clamp this to zero (so that we ignore any negative values).
-      float N_dot_L = std::max(dot(L, g_pointsVN[i].n), 0.0f);
+		// make sure L has been normalised!
+		L = normalize(L);
 
-      // the ambient material colour (always gets added to the final colour)
-      Vec3 Ka(0.2f, 0.2f, 0.2f);
+		// start drawing some quads
+		begin(kQuads);
 
-      // the diffuse material colour
-      Vec3 Kd(1.0f, 1.0f, 1.0f);
+		// loop through each vertex normal
+		for(int i = 0; i < 24; ++i)
+		{
+			// compute N.L
+			// Make sure we clamp this to zero (so that we ignore any negative values).
+			float N_dot_L = std::max(dot(L, g_pointsVN[i].n), 0.0f);
 
-      // Compute the final colour
-      Vec3 colour = Ka + (Kd * N_dot_L);
+			// the ambient material colour (always gets added to the final colour)
+			Vec3 Ka(0.2f, 0.2f, 0.2f);
 
-      // set the vertex colour 
-      setColour(colour);
+			// the diffuse material colour
+			Vec3 Kd(1.0f, 1.0f, 1.0f);
 
-      // specify the vertex
-      addVertex(g_pointsVN[i].v);
-    }
+			// Compute the final colour
+			Vec3 colour = Ka + (Kd * N_dot_L);
 
-    // finish drawing our quads
-    end();
-  }
+			// set the vertex colour 
+			setColour(colour);
 
-  // if we are displaying normals
-  if(g_displayNormals)
-  {
-    // make colour pink
-	  setColour(1.0f, 0.0f, 1.0f);
+			// specify the vertex
+			addVertex(g_pointsVN[i].v);
+		}
 
-    // loop through each vertex
-    for(int i = 0; i < 24; ++i)
-    {
-      // compute an offset (along the normal direction) from the vertex
-      Vec3 pn = g_pointsVN[i].v + (g_pointsVN[i].n * 0.2f);
+		// finish drawing our quads
+		end();
+	}
 
-      // draw a line to show the normal
-      drawLine(g_pointsVN[i].v, pn);
-    }
-  }
+	// if we are displaying normals
+	if(g_displayNormals)
+	{
+		// make colour pink
+		setColour(1.0f, 0.0f, 1.0f);
+
+		// loop through each vertex
+		for(int i = 0; i < 24; ++i)
+		{
+			// compute an offset (along the normal direction) from the vertex
+			Vec3 pn = g_pointsVN[i].v + (g_pointsVN[i].n * 0.2f);
+
+			// draw a line to show the normal
+			drawLine(g_pointsVN[i].v, pn);
+		}
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -229,6 +229,6 @@ void mouseMove(int x, int y)
 //------------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
-  // just run the app.... 
-  return runApp();
+	// just run the app.... 
+	return runApp();
 }

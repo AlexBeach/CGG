@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
 
-// declares a type called 'Vec2' that represents a 2D vector
+/// declares a type called 'Vec2' that represents a 2D vector
 struct Vec2 
 {
   float x; ///< the X coordinate 
@@ -20,25 +20,25 @@ struct Vec2
   const Vec2& operator /= (float b);
 }; 
 
-// performs the dot product between two vectors
+/// performs the dot product between two vectors
 inline float dot(Vec2 a, Vec2 b)
 {
   return (a.x * b.x) + (a.y * b.y);
 }
 
-// returns the squared length of the vector a
+/// returns the squared length of the vector a
 inline float length2(Vec2 a)
 {
   return dot(a, a);
 }
 
-// returns the length of vector a
+/// returns the length of vector a
 inline float length(Vec2 a)
 {
   return std::sqrt(length2(a));
 }
 
-// normalises the 2D vector so it is unit length
+/// normalises the 2D vector so it is unit length
 inline Vec2 normalize(Vec2 a)
 {
   float l = length(a);
@@ -54,7 +54,7 @@ inline Vec2 normalize(Vec2 a)
   return Vec2(l * a.x, l * a.y);
 }
 
-// unary negation
+/// unary negation
 inline Vec2 operator - (Vec2 a)
 {
   Vec2 r;
@@ -63,7 +63,7 @@ inline Vec2 operator - (Vec2 a)
   return r;
 }
 
-// adds two Vec2's. 
+/// adds two Vec2's. 
 inline Vec2 operator + (Vec2 a, Vec2 b)
 {
   Vec2 r;
@@ -72,7 +72,7 @@ inline Vec2 operator + (Vec2 a, Vec2 b)
   return r;
 }
 
-// subtracts two Vec2's. 
+/// subtracts two Vec2's. 
 inline Vec2 operator - (Vec2 a, Vec2 b)
 {
   Vec2 r;
@@ -81,7 +81,7 @@ inline Vec2 operator - (Vec2 a, Vec2 b)
   return r;
 }
 
-// multiplies a float by a Vec2
+/// multiplies a float by a Vec2
 inline Vec2 operator * (float b, Vec2 a)
 {
   Vec2 r;
@@ -90,7 +90,7 @@ inline Vec2 operator * (float b, Vec2 a)
   return r;
 }
 
-// multiplies a Vec2 by a float
+/// multiplies a Vec2 by a float
 inline Vec2 operator * (Vec2 a, float b)
 {
   Vec2 r;
@@ -99,7 +99,7 @@ inline Vec2 operator * (Vec2 a, float b)
   return r;
 }
 
-// divides a Vec2 by a float
+/// divides a Vec2 by a float
 inline Vec2 operator / (Vec2 a, float b)
 {
   Vec2 r;
@@ -108,7 +108,7 @@ inline Vec2 operator / (Vec2 a, float b)
   return r;
 }
 
-// specifies the = operator for Vec2
+/// specifies the = operator for Vec2
 inline const Vec2& Vec2::operator = (Vec2 b)
 {
   x = b.x;
@@ -116,7 +116,7 @@ inline const Vec2& Vec2::operator = (Vec2 b)
   return *this;
 }
 
-// specifies the += operator for Vec2
+/// specifies the += operator for Vec2
 inline const Vec2& Vec2::operator += (Vec2 b)
 {
   x += b.x;
@@ -124,7 +124,7 @@ inline const Vec2& Vec2::operator += (Vec2 b)
   return *this;
 }
 
-// specifies the -= operator for Vec2
+/// specifies the -= operator for Vec2
 inline const Vec2& Vec2::operator -= (Vec2 b)
 {
   x -= b.x;
@@ -132,7 +132,7 @@ inline const Vec2& Vec2::operator -= (Vec2 b)
   return *this;
 }
 
-// specifies the *= operator for Vec2
+/// specifies the *= operator for Vec2
 inline const Vec2& Vec2::operator *= (float b)
 {
   x *= b;
@@ -140,7 +140,7 @@ inline const Vec2& Vec2::operator *= (float b)
   return *this;
 }
 
-// specifies the /= operator for Vec2
+/// specifies the /= operator for Vec2
 inline const Vec2& Vec2::operator /= (float b)
 {
   x /= b;

@@ -13,52 +13,52 @@ int g_lines = 0;
 //------------------------------------------------------------------------------------------------------------------------------------
 void init()
 {
-  // construct a circle from points
-  {
-    g_circle = beginShape();
-      for(float angle = -PI; angle <= PI; angle += 0.2)
-      {
-        Vec3 p(cos(angle), sin(angle), -2.0f);
-        drawPoint(p);
-      }
-    endShape();
-  }
-  
-  // construct a square from a line loop
-  {
-    g_square = beginShape();
-      Vec3 points[] = 
-      {
-        Vec3(-1.0f, 1.0f, -2.0f), 
-        Vec3( 1.0f, 1.0f, -2.0f), 
-        Vec3( 1.0f,-1.0f, -2.0f), 
-        Vec3(-1.0f,-1.0f, -2.0f)
-      };
-      drawLineLoop(points, 4);
-    endShape();
-  }
+	// construct a circle from points
+	{
+		g_circle = beginShape();
+		for(float angle = -PI; angle <= PI; angle += 0.2)
+		{
+			Vec3 p(cos(angle), sin(angle), -2.0f);
+			drawPoint(p);
+		}
+		endShape();
+	}
 
-  // construct a line strip
-  {
-    g_lineStrip = beginShape();
-      Vec3 points[] = 
-      {
-        Vec3(1.0f, 1.0f, -2.0f),
-        Vec3(0.8f,-1.0f, -2.0f),
-        Vec3(-0.8f,-1.0f, -2.0f),
-        Vec3(-1.0f, 1.0f, -2.0f)
-      };
-      drawLineStrip(points, 4);
-    endShape();
-  }
+	// construct a square from a line loop
+	{
+		g_square = beginShape();
+		Vec3 points[] = 
+		{
+			Vec3(-1.0f, 1.0f, -2.0f), 
+			Vec3( 1.0f, 1.0f, -2.0f), 
+			Vec3( 1.0f,-1.0f, -2.0f), 
+			Vec3(-1.0f,-1.0f, -2.0f)
+		};
+		drawLineLoop(points, 4);
+		endShape();
+	}
 
-  // construct a little cross
-  {
-    g_lines = beginShape();
-      drawLine(Vec3(-1.0f, 0, -2.0f), Vec3(1.0f, 0, -2.0f));
-      drawLine(Vec3(0, -1.0f, -2.0f), Vec3(0, 1.0f, -2.0f));
-    endShape();
-  }
+	// construct a line strip
+	{
+		g_lineStrip = beginShape();
+		Vec3 points[] = 
+		{
+			Vec3(1.0f, 1.0f, -2.0f),
+			Vec3(0.8f,-1.0f, -2.0f),
+			Vec3(-0.8f,-1.0f, -2.0f),
+			Vec3(-1.0f, 1.0f, -2.0f)
+		};
+		drawLineStrip(points, 4);
+		endShape();
+	}
+
+	// construct a little cross
+	{
+		g_lines = beginShape();
+		drawLine(Vec3(-1.0f, 0, -2.0f), Vec3(1.0f, 0, -2.0f));
+		drawLine(Vec3(0, -1.0f, -2.0f), Vec3(0, 1.0f, -2.0f));
+		endShape();
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -86,59 +86,59 @@ void draw3D()
 		drawLine(zmin, zmax);
 	}
 
-  setColour(1.0f, 1.0f, 1.0f);
+	setColour(1.0f, 1.0f, 1.0f);
 
-  // draw all of the shapes using nice and efficient display lists... :)
-  Matrix3 matrix;
-  matrix.w.x = -10.0f;
-  drawShape(matrix, g_circle);
-  matrix.w.x = -5.0f;
-  drawShape(matrix, g_square);
-  matrix.w.x = 5.0f;
-  drawShape(matrix, g_lineStrip);
-  matrix.w.x = 10.0f;
-  drawShape(matrix, g_lines);
+	// draw all of the shapes using nice and efficient display lists... :)
+	Matrix3 matrix;
+	matrix.w.x = -10.0f;
+	drawShape(matrix, g_circle);
+	matrix.w.x = -5.0f;
+	drawShape(matrix, g_square);
+	matrix.w.x = 5.0f;
+	drawShape(matrix, g_lineStrip);
+	matrix.w.x = 10.0f;
+	drawShape(matrix, g_lines);
 
-  // draw the same shapes again (just below), using sucky immediate mode
-  setColour(1.0f, 1.0f, 0.0f);
-  
-  // draw a circle
-  for(float angle = -PI; angle <= PI; angle += 0.2)
-  {
-    Vec3 p(cos(angle), sin(angle), -2.0f);
-    p += Vec3(-10.0f, -5.0f, 0);
-    drawPoint(p);
-  }
-  
-  // construct a square from a line loop
-  {
-    Vec3 points[] = 
-    {
-      Vec3(-6.0f,-4.0f, -2.0f), 
-      Vec3(-4.0f,-4.0f, -2.0f), 
-      Vec3(-4.0f,-6.0f, -2.0f), 
-      Vec3(-6.0f,-6.0f, -2.0f)
-    };
-    drawLineLoop(points, 4);
-  }
+	// draw the same shapes again (just below), using sucky immediate mode
+	setColour(1.0f, 1.0f, 0.0f);
 
-  // construct a line strip
-  {
-    Vec3 points[] = 
-    {
-      Vec3( 6.0f,-4.0f, -2.0f),
-      Vec3( 5.8f,-6.0f, -2.0f),
-      Vec3( 4.2f,-6.0f, -2.0f),
-      Vec3( 4.0f,-4.0f, -2.0f)
-    };
-    drawLineStrip(points, 4);
-  }
+	// draw a circle
+	for(float angle = -PI; angle <= PI; angle += 0.2)
+	{
+		Vec3 p(cos(angle), sin(angle), -2.0f);
+		p += Vec3(-10.0f, -5.0f, 0);
+		drawPoint(p);
+	}
 
-  // construct a little cross
-  {
-    drawLine(Vec3(11.0f, -5.0f, -2.0f), Vec3(9.0f, -5.0f, -2.0f));
-    drawLine(Vec3(10, -6.0f, -2.0f), Vec3(10, -4.0f, -2.0f));
-  }
+	// construct a square from a line loop
+	{
+		Vec3 points[] = 
+		{
+			Vec3(-6.0f,-4.0f, -2.0f), 
+			Vec3(-4.0f,-4.0f, -2.0f), 
+			Vec3(-4.0f,-6.0f, -2.0f), 
+			Vec3(-6.0f,-6.0f, -2.0f)
+		};
+		drawLineLoop(points, 4);
+	}
+
+	// construct a line strip
+	{
+		Vec3 points[] = 
+		{
+			Vec3( 6.0f,-4.0f, -2.0f),
+			Vec3( 5.8f,-6.0f, -2.0f),
+			Vec3( 4.2f,-6.0f, -2.0f),
+			Vec3( 4.0f,-4.0f, -2.0f)
+		};
+		drawLineStrip(points, 4);
+	}
+
+	// construct a little cross
+	{
+		drawLine(Vec3(11.0f, -5.0f, -2.0f), Vec3(9.0f, -5.0f, -2.0f));
+		drawLine(Vec3(10, -6.0f, -2.0f), Vec3(10, -4.0f, -2.0f));
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -177,6 +177,6 @@ void mouseMove(int x, int y)
 //------------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
-  // just run the app.... 
-  return runApp();
+	// just run the app.... 
+	return runApp();
 }

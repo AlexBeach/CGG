@@ -1,7 +1,7 @@
 #pragma once
 #include "cgg/Vec2.h"
 
-// declares a type called 'Vec3' that represents a 3D vector
+/// declares a type called 'Vec3' that represents a 3D vector
 struct Vec3 
 {
   float x; ///< the X coordinate 
@@ -21,30 +21,30 @@ struct Vec3
   const Vec3& operator *= (float b);
   const Vec3& operator /= (float b);
 
-  // cast to Vec2
+  /// cast to Vec2
   operator Vec2 () const
     { return Vec2(x, y); }
 }; 
 
-// performs the dot product between two vectors
+/// performs the dot product between two vectors
 inline float dot(const Vec3& a, const Vec3& b)
 {
   return (a.x * b.x) + (a.y * b.y)  + (a.z * b.z);
 }
 
-// returns the squared length of the vector a
+/// returns the squared length of the vector a
 inline float length2(const Vec3& a)
 {
   return dot(a, a);
 }
 
-// returns the length of vector a
+/// returns the length of vector a
 inline float length(const Vec3& a)
 {
   return std::sqrt(length2(a));
 }
 
-// normalises the 3D vector so it is unit length
+/// normalises the 3D vector so it is unit length
 inline Vec3 normalize(const Vec3& a)
 {
   float l = length(a);
@@ -60,7 +60,7 @@ inline Vec3 normalize(const Vec3& a)
   return Vec3(l * a.x, l * a.y, l * a.z);
 }
 
-// unary negation
+/// unary negation
 inline Vec3 operator - (const Vec3& a)
 {
   Vec3 r;
@@ -70,7 +70,7 @@ inline Vec3 operator - (const Vec3& a)
   return r;
 }
 
-// adds two Vec3's. 
+/// adds two Vec3's. 
 inline Vec3 operator + (const Vec3& a, const Vec3& b)
 {
   Vec3 r;
@@ -80,7 +80,7 @@ inline Vec3 operator + (const Vec3& a, const Vec3& b)
   return r;
 }
 
-// subtracts two Vec3's. 
+/// subtracts two Vec3's. 
 inline Vec3 operator - (const Vec3& a, const Vec3& b)
 {
   Vec3 r;
@@ -90,7 +90,7 @@ inline Vec3 operator - (const Vec3& a, const Vec3& b)
   return r;
 }
 
-// multiplies a float by a Vec3
+/// multiplies a float by a Vec3
 inline Vec3 operator * (float b, const Vec3& a)
 {
   Vec3 r;
@@ -100,7 +100,7 @@ inline Vec3 operator * (float b, const Vec3& a)
   return r;
 }
 
-// multiplies a Vec3 by a float
+/// multiplies a Vec3 by a float
 inline Vec3 operator * (const Vec3& a, float b)
 {
   Vec3 r;
@@ -110,7 +110,7 @@ inline Vec3 operator * (const Vec3& a, float b)
   return r;
 }
 
-// divides a Vec3 by a float
+/// divides a Vec3 by a float
 inline Vec3 operator / (const Vec3& a, float b)
 {
   Vec3 r;
@@ -120,7 +120,7 @@ inline Vec3 operator / (const Vec3& a, float b)
   return r;
 }
 
-// specifies the = operator for Vec3
+/// specifies the = operator for Vec3
 inline const Vec3& Vec3::operator = (const Vec3& b)
 {
   x = b.x;
@@ -129,7 +129,7 @@ inline const Vec3& Vec3::operator = (const Vec3& b)
   return *this;
 }
 
-// specifies the += operator for Vec3
+/// specifies the += operator for Vec3
 inline const Vec3& Vec3::operator += (const Vec3& b)
 {
   x += b.x;
@@ -138,7 +138,7 @@ inline const Vec3& Vec3::operator += (const Vec3& b)
   return *this;
 }
 
-// specifies the -= operator for Vec3
+/// specifies the -= operator for Vec3
 inline const Vec3& Vec3::operator -= (const Vec3& b)
 {
   x -= b.x;
@@ -147,7 +147,7 @@ inline const Vec3& Vec3::operator -= (const Vec3& b)
   return *this;
 }
 
-// specifies the *= operator for Vec3
+/// specifies the *= operator for Vec3
 inline const Vec3& Vec3::operator *= (float b)
 {
   x *= b;
@@ -156,7 +156,7 @@ inline const Vec3& Vec3::operator *= (float b)
   return *this;
 }
 
-// specifies the /= operator for Vec3
+/// specifies the /= operator for Vec3
 inline const Vec3& Vec3::operator /= (float b)
 {
   x /= b;

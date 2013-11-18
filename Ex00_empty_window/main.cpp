@@ -8,15 +8,15 @@ float g_time = 0;
 //------------------------------------------------------------------------------------------------------------------------------------
 void init()
 {
-  // give our app a title 
-  setWindowTitle("Hello App World!");
+	// give our app a title 
+	setWindowTitle("Hello App World!");
 
-  // sets the size of the 2D screen coordinates. I'm just initialising the defaults here. You can use whatever you want!
-  // args are: minx, maxx, miny, maxy
-  setScreenCoordinates(-20.0f, 20.0f, -15.0f, 15.0f);
+	// sets the size of the 2D screen coordinates. I'm just initialising the defaults here. You can use whatever you want!
+	// args are: minx, maxx, miny, maxy
+	setScreenCoordinates(-20.0f, 20.0f, -15.0f, 15.0f);
 
-  // setting the background colour to a default grey!
-  setBackgroundColour(0.6f, 0.6f, 0.7f);
+	// setting the background colour to a default grey!
+	setBackgroundColour(0.6f, 0.6f, 0.7f);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -50,16 +50,16 @@ void draw3D()
 //------------------------------------------------------------------------------------------------------------------------------------
 void draw()
 {
-  // draw something in 2D just so you can see it does actually work!
-  setColour(0.1f, 0.1f, 0.9f);
-  Vec2 topLeft(-19.5f, 14.5f);
-  Vec2 topRight(19.5f, 14.5f);
-  Vec2 bottomLeft(-19.5f, -14.5f);
-  Vec2 bottomRight(19.5f, -14.5f);
-  drawLine(topLeft, topRight);
-  drawLine(topRight, bottomRight);
-  drawLine(bottomRight, bottomLeft);
-  drawLine(bottomLeft, topLeft);
+	// draw something in 2D just so you can see it does actually work!
+	setColour(0.1f, 0.1f, 0.9f);
+	Vec2 topLeft(-19.5f, 14.5f);
+	Vec2 topRight(19.5f, 14.5f);
+	Vec2 bottomLeft(-19.5f, -14.5f);
+	Vec2 bottomRight(19.5f, -14.5f);
+	drawLine(topLeft, topRight);
+	drawLine(topRight, bottomRight);
+	drawLine(bottomRight, bottomLeft);
+	drawLine(bottomLeft, topLeft);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -91,6 +91,6 @@ void mouseMove(int x, int y)
 //------------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
-  // just run the app.... 
-  return runApp();
+	// just run the app.... 
+	return runApp();
 }

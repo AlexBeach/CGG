@@ -1,7 +1,7 @@
 #pragma once
 #include "cgg/Vec2.h"
 
-// declares a type called 'Matrix2' that represents a 2D transform matrix
+/// declares a type called 'Matrix2' that represents a 2D transform matrix
 struct Matrix2
 {
   Vec2 x; ///< the X axis direction
@@ -11,13 +11,13 @@ struct Matrix2
   // constructor functions (initialises to the Identity matrix)
   Matrix2() : x(1.0f, 0.0f), y(0.0f, 1.0f), w(0.0f, 0.0f) {}
   
-  // initialises the matrix from 6 floats 
+  /// initialises the matrix from 6 floats 
   Matrix2(float xx, float xy, 
           float yx, float yy,
           float wx, float wy) : x(xx, xy), y(yx, yy), w(wx, wy)
   {}
   
-  // initialises the matrix from 3x2D vectors
+  /// initialises the matrix from 3x2D vectors
   Matrix2(Vec2 X, 
           Vec2 Y,
           Vec2 W) : x(X), y(Y), w(W)
@@ -40,7 +40,7 @@ struct Matrix2
     }
 };
 
-// rotate the 2D vector v by the matrix m
+/// rotate the 2D vector v by the matrix m
 inline Vec2 rotate(const Matrix2& m, Vec2 v)
 {
   Vec2 r = m.x * v.x;
@@ -48,13 +48,13 @@ inline Vec2 rotate(const Matrix2& m, Vec2 v)
   return r;
 }
 
-// transfrms the 2D point p by the matrix m
+/// transfrms the 2D point p by the matrix m
 inline Vec2 transform(const Matrix2& m, Vec2 p)
 {
   return rotate(m, p) + m.w;
 }
 
-// rotate the 2D vector v by the inverse of matrix m
+/// rotate the 2D vector v by the inverse of matrix m
 inline Vec2 inverseRotate(const Matrix2& m, Vec2 v)
 {
   Vec2 r;
@@ -63,7 +63,7 @@ inline Vec2 inverseRotate(const Matrix2& m, Vec2 v)
   return r;
 }
 
-// transfrms the 2D point p by the inverse of matrix m
+/// transfrms the 2D point p by the inverse of matrix m
 inline Vec2 inverseTransform(const Matrix2& m, Vec2 p)
 {
   return inverseRotate(m, p - m.w);

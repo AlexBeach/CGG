@@ -17,8 +17,16 @@ const float TWO_PI = 6.283185307179586476925286766559f;
 void setBackgroundColour(float r, float g, float b);
 
 //------------------------------------------------------------------------------------------------------------------------------------
-/// GPU BATCHING FUNCTIONS
-/// 
+// GPU BATCHING FUNCTIONS
+//------------------------------------------------------------------------------------------------------------------------------------
+
+/// \brief  Call this to start drawing a shape. Be sure to store the returned integer! (The integer represents the shape once uploaded to the GPU!)
+///         This can be used with any of the drawing functions with the exception of the 'drawPrimitives' calls. The returned integer is a 
+///         handle to the object on the GPU, and can be passed to any of the drawShape functions to render the stored geometry. 
+///         The benefits of this method are that there are a minimal number of functions called on the CPU to render (no function call 
+///         overhead, which makes things go a bit quicker!). In addition, because the geometry is resident on the GPU, no time needs 
+///         to be wasted sending it to the GPU!
+/// \note
 /// These funcs allow you to send batches of geometry data to the GPU. The rough process is as follows... 
 /// Somewhere, you will need to store a reference to the shape:
 /// 
@@ -44,14 +52,6 @@ void setBackgroundColour(float r, float g, float b);
 /// \code 
 /// drawShape(g_handleToShape);
 /// \endcode
-//------------------------------------------------------------------------------------------------------------------------------------
-
-/// \brief  Call this to start drawing a shape. Be sure to store the returned integer! (The integer represents the shape once uploaded to the GPU!)
-///         This can be used with any of the drawing functions with the exception of the 'drawPrimitives' calls. The returned integer is a 
-///         handle to the object on the GPU, and can be passed to any of the drawShape functions to render the stored geometry. 
-///         The benefits of this method are that there are a minimal number of functions called on the CPU to render (no function call 
-///         overhead, which makes things go a bit quicker!). In addition, because the geometry is resident on the GPU, no time needs 
-///         to be wasted sending it to the GPU!
 int beginShape();
 
 /// \brief  call this to stop drawing a shape
@@ -144,19 +144,7 @@ void drawLineLoop(const Vec2 points[], int numPoints);
 void drawLineLoop(const Vec3 points[], int numPoints);
 
 //------------------------------------------------------------------------------------------------------------------------------------
-/// GENERIC RENDERING FUNCTIONS
-/// 
-/// These functions provide a generic way to draw geometry. Simple call begin() with one the enumeration values contained within 
-/// the PrimitiveType enum, add a bunch of vertices, and then finally call end(). For example, to draw a single square:
-/// \code
-/// begin(kQuads);
-///   setNormal( Vec3( 0, 1, 0) );
-///   addVertex( Vec3(-1, 0,-1) );
-///   addVertex( Vec3( 1, 0,-1) );
-///   addVertex( Vec3( 1, 0, 1) );
-///   addVertex( Vec3(-1, 0, 1) );
-/// end();
-/// \endcode
+// GENERIC RENDERING FUNCTIONS
 //------------------------------------------------------------------------------------------------------------------------------------
 
 /// \brief  All of the geometry primitives that can be drawn
@@ -174,6 +162,18 @@ enum PrimitiveType
 
 /// \brief  begin drawing a set of primitives. This MUST be matched with a call to end() once the drawing has finished.
 /// \param  geometryType the type of geometry to draw (one of the PrimitiveType enum values above)
+/// \note
+/// These functions provide a generic way to draw geometry. Simple call begin() with one the enumeration values contained within 
+/// the PrimitiveType enum, add a bunch of vertices, and then finally call end(). For example, to draw a single square:
+/// \code
+/// begin(kQuads);
+///   setNormal( Vec3( 0, 1, 0) );
+///   addVertex( Vec3(-1, 0,-1) );
+///   addVertex( Vec3( 1, 0,-1) );
+///   addVertex( Vec3( 1, 0, 1) );
+///   addVertex( Vec3(-1, 0, 1) );
+/// end();
+/// \endcode
 void begin(PrimitiveType geometryType);
 
   /// \brief  specify a 3D surface normal 
@@ -196,7 +196,7 @@ void begin(PrimitiveType geometryType);
 void end();
 
 //------------------------------------------------------------------------------------------------------------------------------------
-/// VERTEX ARRAY DRAWING FUNCTIONS
+// VERTEX ARRAY DRAWING FUNCTIONS
 //------------------------------------------------------------------------------------------------------------------------------------
 
 /// \brief  vertex + normal structure
@@ -241,8 +241,6 @@ inline void drawPrimitives(const std::vector<VertexNormalColour>& vertices, cons
 
 //------------------------------------------------------------------------------------------------------------------------------------
 // MATRIX STACK FUNCTIONS
-//
-// 
 //------------------------------------------------------------------------------------------------------------------------------------
 
 /// \brief  pushes a new matrix onto the stack
@@ -251,19 +249,37 @@ void pushMatrix();
 /// \brief  multiplies the current matrix by the specified transform matrix
 void multMatrix(const Matrix2& tm);
 
+/// \brief	translates the current matrix by the specified amount
 void translate(float x, float y);
+
+/// \brief	scales the current transform by the specified amount
 void scale(float x, float y);
+
+/// \brief	translates the current matrix by the specified amount
 void translate(const Vec2& offset);
+
+/// \brief	scales the current transform by the specified amount
 void scale(const Vec2& size);
+
+/// \brief	rotates the current matrix by the specified amount
 void rotate(float radians);
 
 /// \brief  multiplies the current matrix by the specified transform matrix
 void multMatrix(const Matrix3& tm);
 
+/// \brief	translates the current matrix by the specified amount
 void translate(float x, float y, float z);
+
+/// \brief	scales the current transform by the specified amount
 void scale(float x, float y, float z);
+
+/// \brief	translates the current matrix by the specified amount
 void translate(const Vec3& offset);
+
+/// \brief	scales the current transform by the specified amount
 void scale(const Vec3& size);
+
+/// \brief	rotates the current matrix by the specified angle around the axis provided
 void rotate(float radians, const Vec3& axis);
 
 /// \brief  pops a matrix off the stack

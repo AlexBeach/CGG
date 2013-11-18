@@ -1,6 +1,7 @@
 #pragma once
 #include "cgg/Matrix3.h"
 
+/// A class that represents a 3D transformation. This is not brilliant (based on euler angle triplets!)
 struct Transform3
 {
   Vec3 rotate;   ///< the rotation angle

@@ -120,6 +120,7 @@ inline Vec3 inverseTransform(const Matrix3& m, Vec3 p)
   return inverseRotate(m, p - m.w);
 }
 
+/// multiplies the local space child matrix by its parent, and returns the child matrix in world space 
 inline Matrix3 operator * (const Matrix3& child, const Matrix3& parent)
 {
   Matrix3 r;
