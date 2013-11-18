@@ -1,0 +1,14 @@
+NAME libCGG
+INCLUDE ./include/
+SOURCE ./src/
+INCLUDE_PATHS ./include/;./src/freeglut/include/;
+CONFIG
+{
+  BUILD Debug
+  PLATFORM WIN64
+}
+CONFIG
+{
+  BUILD Release
+  PLATFORM WIN64
+}
