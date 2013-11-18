@@ -1,0 +1,13 @@
+NAME Ex03_drawing2D
+DEPENDS libCGG
+SOURCE ./
+CONFIG
+{
+  BUILD Debug
+  PLATFORM WIN64
+}
+CONFIG
+{
+  BUILD Release
+  PLATFORM WIN64
+}
