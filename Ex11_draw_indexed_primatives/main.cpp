@@ -1,54 +1,61 @@
 #include "cgg/Graphics.h"
 #include <iostream>
 
-float g_time = 0;
-
-Vec3 g_pointsV[] = 
+// This example uses indexed primitives to draw some geometry (just a cube in this case!). 
+// When drawing indexed primitves, we need each of the vertices in it's own array. In this case I'm using just Vec3's, but you can also 
+// use the VertexNormal, VertexColour, or VertexNormalColour structs.
+// So here we have the 8 vertices that form a cube:
+// 
+Vec3 g_points[] = 
 {
-	Vec3(-1.0f, -1.0f, 0.0f),
-	Vec3( 1.0f, -1.0f, 0.0f),
-	Vec3( 1.0f,  1.0f, 0.0f),
-	Vec3(-1.0f,  1.0f, 0.0f)
+	// +ve Z
+	Vec3(-1.0f, -1.0f, 1.0f),
+	Vec3( 1.0f, -1.0f, 1.0f),
+	Vec3( 1.0f,  1.0f, 1.0f),
+	Vec3(-1.0f,  1.0f, 1.0f),
+
+	// -ve Z
+	Vec3(-1.0f,  1.0f, -1.0f),
+	Vec3( 1.0f,  1.0f, -1.0f),
+	Vec3( 1.0f, -1.0f, -1.0f),
+	Vec3(-1.0f, -1.0f, -1.0f)
 };
 
-VertexNormal g_pointsVN[] = 
+// And now we have an array of 24 indices that define each line that makes up the cube
+int g_indices[] = 
 {
-	{ Vec3(-1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
-	{ Vec3( 1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
-	{ Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
-	{ Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) }
-};
+	// +ve Z face
+	0, 1,
+	1, 2,
+	2, 3,
+	3, 0,
 
-VertexColour g_pointsVC[] = 
-{
-	{ Vec3(-1.0f, -1.0f, 0.0f), Vec3(1.0f, 1.0f, 0.0f) },
-	{ Vec3( 1.0f, -1.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f) },
-	{ Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 1.0f, 0.0f) },
-	{ Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) }
-};
+	// -ve Z face
+	4, 5,
+	5, 6,
+	6, 7,
+	7, 4,
 
-VertexNormalColour g_pointsVNC[] = 
-{
-	{ Vec3(-1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(1.0f, 1.0f, 0.0f) },
-	{ Vec3( 1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(1.0f, 0.0f, 0.0f) },
-	{ Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 1.0f, 0.0f) },
-	{ Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) }
+	// and the 4 lines to connect both faces
+	0, 7,
+	1, 6,
+	2, 5,
+	3, 4
 };
-
 
 //------------------------------------------------------------------------------------------------------------------------------------
 // called when we initialise the app
 //------------------------------------------------------------------------------------------------------------------------------------
 void init()
 {
+	setWindowTitle("Indexed Primitives");
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
 // called when we need to update the app. 'dt' is the time delta (the number of seconds since the last frame)
 //------------------------------------------------------------------------------------------------------------------------------------
-void update(float dt)
+void update(float /*dt*/)
 {
-	g_time += dt;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -68,30 +75,15 @@ void draw3D()
 		drawLine(zmin, zmax);
 	}
 
-	pushMatrix();
-		translate(-8.0f, 0, 0);
-		drawPrimitives(g_pointsV, 4, kQuads);
-	popMatrix();
+	// draw the cube in white
+	setColour(1.0f, 1.0f, 1.0f);
 
-	pushMatrix();
-		translate(-3.0f, 0, 0);
-		drawPrimitives(g_pointsVC, 4, kQuads);
-	popMatrix();
-
-	enableLighting();
-		setColour(1.0f, 1.0f, 1.0f);
-
-		pushMatrix();
-			translate(3.0f, 0, 0);
-			drawPrimitives(g_pointsVN, 4, kQuads);
-		popMatrix();
-
-		pushMatrix();
-			translate(8.0f, 0, 0);
-			drawPrimitives(g_pointsVNC, 4, kQuads);
-		popMatrix();
-	disableLighting();
-
+	// Arguments are:
+	// The vertex array
+	// The index array
+	// The number of indices
+	// The typ0e of geometry to draw
+	drawPrimitives(g_points, g_indices, 24, kLines);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------

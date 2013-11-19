@@ -65,7 +65,7 @@ void draw()
 //------------------------------------------------------------------------------------------------------------------------------------
 /// called when the left mouse button is pressed
 //------------------------------------------------------------------------------------------------------------------------------------
-void mousePress(int x, int y)
+void mousePress(int /*button*/, int x, int y)
 {
 	Vec2 p = getScreenCoordinates(x, y);
 }
@@ -73,7 +73,7 @@ void mousePress(int x, int y)
 //------------------------------------------------------------------------------------------------------------------------------------
 /// called when the left mouse button is released
 //------------------------------------------------------------------------------------------------------------------------------------
-void mouseRelease(int x, int y)
+void mouseRelease(int /*button*/, int x, int y)
 {
 	Vec2 p = getScreenCoordinates(x, y);
 }

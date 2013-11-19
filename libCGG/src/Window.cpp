@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <time.h>
 #include "GL/glut.h"
+#include "GL/freeglut_ext.h"
 
 // declared in main.cpp
 extern void init();
@@ -11,24 +12,45 @@ extern void update(float dt);
 extern void draw();
 extern void draw3D();
 extern void mouseMove(int w, int h);
-extern void mousePress(int w, int h);
-extern void mouseRelease(int w, int h);
+extern void mousePress(int button, int w, int h);
+extern void mouseRelease(int button, int w, int h);
 
-float zoom = 15.0f;
-float rotx = 0;
-float roty = 0.001f;
-float tx = 0;
-float ty = 0;
-int lastx=0;
-int lasty=0;
-unsigned char Buttons[3] = {0};
-bool rotating = false;
-bool _g_mayaCamEnabled = true;
+static bool _g_isFullscreen = false;
+
+void fullScreen(bool enable)
+{
+	if(enable != _g_isFullscreen)
+	{
+		glutFullScreenToggle();	
+		_g_isFullscreen = enable;
+	}
+}
+
+static float zoom = 15.0f;
+static float rotx = 0;
+static float roty = 0.001f;
+static float tx = 0;
+static float ty = 0;
+static int lastx=0;
+static int lasty=0;
+static unsigned char Buttons[3] = {0};
+static bool rotating = false;
+static bool _g_mayaCamEnabled = true;
 extern void draw3D();
 
+void enableMayaCamera()
+{
+	_g_mayaCamEnabled = true;
+}
+
+void disableMayaCamera()
+{
+	_g_mayaCamEnabled = false;
+}
+
 // current state of the keyboard
-bool g_keys[512] = {false};
-int g_modifiers = 0;
+static bool g_keys[512] = {false};
+static int g_modifiers = 0;
 
 /// \brief	returns true if the shift modifier key is pressed
 bool isShiftPressed()
@@ -146,7 +168,7 @@ int getWindowHeight()
 	return g_h;
 }
 
-float g_2DCoords[4] = {-20.0f, 20.0f, -15.0f, 15.0f};
+static float g_2DCoords[4] = {-20.0f, 20.0f, -15.0f, 15.0f};
 
 void setScreenCoordinates(float minx, float maxx, float miny, float maxy)
 {
@@ -180,15 +202,18 @@ void onDraw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	glTranslatef(0,0,-zoom);
-	glTranslatef(tx,ty,0);
-	glRotatef(rotx,1,0,0);
-	glRotatef(roty,0,1,0);
+	if(_g_mayaCamEnabled)
+	{
+		glTranslatef(0,0,-zoom);
+		glTranslatef(tx,ty,0);
+		glRotatef(rotx,1,0,0);
+		glRotatef(roty,0,1,0);
+	}
 
-  glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	// perform user drawing
 	draw3D();
-  glDisable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -223,6 +248,15 @@ void resizeWindow(int w, int h)
 void setWindowTitle(const char title[])
 {
 	glutSetWindowTitle(title);
+}
+
+bool isButtonHeld(int button)
+{
+	if(button < 3)
+	{
+		return Buttons[button] != 0;
+	}
+	return false;
 }
 
 void onMouseMove(int x, int y)
@@ -260,17 +294,23 @@ void onMouseMove(int x, int y)
 void onMouseButton(int button, int state, int w, int h)
 {
 	g_modifiers = glutGetModifiers();
+
+	int ibutton = 0;
+
 	// store button state
 	switch (button)
 	{
 	case GLUT_LEFT_BUTTON:
 		Buttons[0] = state == GLUT_DOWN;
+		ibutton = 0;
 		break;
 	case GLUT_MIDDLE_BUTTON:
 		Buttons[1] = state == GLUT_DOWN;
+		ibutton = 1;
 		break;
 	case GLUT_RIGHT_BUTTON:
 		Buttons[2] = state == GLUT_DOWN;
+		ibutton = 2;
 		break;
 	default:
 		break;
@@ -279,7 +319,7 @@ void onMouseButton(int button, int state, int w, int h)
 	lasty = h;
 
 	// if entering rotation mode
-	if(state == GLUT_DOWN && (g_modifiers & GLUT_ACTIVE_ALT))
+	if(state == GLUT_DOWN && (g_modifiers & GLUT_ACTIVE_ALT) && _g_mayaCamEnabled)
 	{
 		rotating = true;
 	}
@@ -289,15 +329,14 @@ void onMouseButton(int button, int state, int w, int h)
 		rotating = Buttons[0] || Buttons[1] || Buttons[2];
 	}
 	else
-	if(button == GLUT_LEFT_BUTTON)
 	{
 		if(state == GLUT_DOWN)
 		{
-			mousePress(w, g_h - h);
+			mousePress(ibutton, w, g_h - h);
 		}
 		else
 		{
-			mouseRelease(w, g_h - h);
+			mouseRelease(ibutton, w, g_h - h);
 		}
 	}
 }
@@ -305,8 +344,8 @@ void onMouseButton(int button, int state, int w, int h)
 // the main entry point
 int runApp()
 {
-  char* foo[] = {"foo.exe", 0};
-  int argc = 1;
+	char* foo[] = {"foo.exe", 0};
+	int argc = 1;
 	glutInit(&argc, foo);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	glutInitWindowSize(800, 600);

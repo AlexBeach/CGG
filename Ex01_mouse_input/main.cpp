@@ -66,43 +66,47 @@ void draw()
 //------------------------------------------------------------------------------------------------------------------------------------
 /// called when the left mouse button is pressed
 //------------------------------------------------------------------------------------------------------------------------------------
-void mousePress(int x, int y)
+void mousePress(int button, int x, int y)
 {
 	// convert the mouse click into screen coordinates
 	Vec2 p = getScreenCoordinates(x, y);
 
-	// There are a few 'meta' keys than can be recieved when a mouse click occurs. In this case, I'm just looking for control.
-	// Shift is also available (isShiftPressed), as is Alt (isAltPressed). Currently mouse messages when alt is pressed are intercepted 
-	// by my Maya camera code (so you wont be able to recieve them!). If you need these Alt+mouse messages, then you will have to disable 
-	// the maya camera (i.e. call disableMayaCamera()).
-	if(isCtrlPressed())
+	// if left button pressed
+	if(button == 0)
 	{
-		// and we have some points in the array
-		if(g_points.size())
+		// There are a few 'meta' keys than can be recieved when a mouse click occurs. In this case, I'm just looking for control.
+		// Shift is also available (isShiftPressed), as is Alt (isAltPressed). Currently mouse messages when alt is pressed are intercepted 
+		// by my Maya camera code (so you wont be able to recieve them!). If you need these Alt+mouse messages, then you will have to disable 
+		// the maya camera (i.e. call disableMayaCamera()).
+		if(isCtrlPressed())
 		{
-			// remove the last point
-			g_points.pop_back();
+			// and we have some points in the array
+			if(g_points.size())
+			{
+				// remove the last point
+				g_points.pop_back();
+			}
 		}
-	}
-	else
-	{
-		// otherwise, store the current point
-		g_currPoint = p;
+		else
+		{
+			// otherwise, store the current point
+			g_currPoint = p;
 
-		// and set a flag to make sure we know we're dragging
-		g_mouseIsDragging = true;
+			// and set a flag to make sure we know we're dragging
+			g_mouseIsDragging = true;
+		}
 	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
 /// called when the left mouse button is released
 //------------------------------------------------------------------------------------------------------------------------------------
-void mouseRelease(int x, int y)
+void mouseRelease(int button, int x, int y)
 {
 	Vec2 p = getScreenCoordinates(x, y);
 
 	// when the mouse is released, if we are dragging the mouse...
-	if(g_mouseIsDragging)
+	if(button == 0 && g_mouseIsDragging)
 	{
 		// add the point to the back of the point array
 		g_points.push_back(p);

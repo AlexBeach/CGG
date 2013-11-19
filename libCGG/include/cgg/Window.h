@@ -50,6 +50,19 @@ bool isAltPressed();
 bool isCtrlPressed();
 
 //------------------------------------------------------------------------------------------------------------------------------------
+// MAYA CAMERA 
+//------------------------------------------------------------------------------------------------------------------------------------
+void enableMayaCamera();
+
+/// \brief	call this to provide your own mouse handling code
+void disableMayaCamera();
+
+/// \brief	returns true if the mouse button is currently held. 
+/// \param	button 0 = LEFT, 1 = MIDDLE, 2 = RIGHT.
+/// \return	true if the specified button is held
+bool isButtonHeld(int button);
+
+//------------------------------------------------------------------------------------------------------------------------------------
 // WINDOW FUNCTIONS
 // The following functions control the window properties
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -81,6 +94,9 @@ Vec2 getScreenCoordinates(int x, int y);
 /// \brief  Sets the screen space coordinate system. By default screen coordinates have the range [-20, -15] to [20, 15]. The 
 ///         getScreenCoordinates function can be used to 
 void setScreenCoordinates(float minx, float maxx, float miny, float maxy);
+
+/// \brief	makes the window fullscreen
+void fullScreen(bool enable);
 
 //------------------------------------------------------------------------------------------------------------------------------------
 // MAIN ENTRY POINT

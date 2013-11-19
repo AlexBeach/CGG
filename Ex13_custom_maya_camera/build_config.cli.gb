@@ -1,0 +1,13 @@
+NAME Ex13_custom_maya_camera
+DEPENDS libCGG
+SOURCE ./
+CONFIG
+{
+  BUILD Debug
+  PLATFORM WIN64
+}
+CONFIG
+{
+  BUILD Release
+  PLATFORM WIN64
+}

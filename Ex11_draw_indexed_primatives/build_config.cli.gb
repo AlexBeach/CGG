@@ -1,0 +1,13 @@
+NAME Ex11_draw_indexed_primatives
+DEPENDS libCGG
+SOURCE ./
+CONFIG
+{
+  BUILD Debug
+  PLATFORM WIN64
+}
+CONFIG
+{
+  BUILD Release
+  PLATFORM WIN64
+}

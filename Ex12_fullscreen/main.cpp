@@ -1,54 +1,29 @@
 #include "cgg/Graphics.h"
 #include <iostream>
 
-float g_time = 0;
-
-Vec3 g_pointsV[] = 
-{
-	Vec3(-1.0f, -1.0f, 0.0f),
-	Vec3( 1.0f, -1.0f, 0.0f),
-	Vec3( 1.0f,  1.0f, 0.0f),
-	Vec3(-1.0f,  1.0f, 0.0f)
-};
-
-VertexNormal g_pointsVN[] = 
-{
-	{ Vec3(-1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
-	{ Vec3( 1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
-	{ Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) },
-	{ Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) }
-};
-
-VertexColour g_pointsVC[] = 
-{
-	{ Vec3(-1.0f, -1.0f, 0.0f), Vec3(1.0f, 1.0f, 0.0f) },
-	{ Vec3( 1.0f, -1.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f) },
-	{ Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 1.0f, 0.0f) },
-	{ Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f) }
-};
-
-VertexNormalColour g_pointsVNC[] = 
-{
-	{ Vec3(-1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(1.0f, 1.0f, 0.0f) },
-	{ Vec3( 1.0f, -1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(1.0f, 0.0f, 0.0f) },
-	{ Vec3( 1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 1.0f, 0.0f) },
-	{ Vec3(-1.0f,  1.0f, 0.0f), Vec3(0.0f, 0.0f, 1.0f), Vec3(0.0f, 0.0f, 1.0f) }
-};
-
+float g_timer = 0;
 
 //------------------------------------------------------------------------------------------------------------------------------------
 // called when we initialise the app
 //------------------------------------------------------------------------------------------------------------------------------------
 void init()
 {
+	// setting the background colour to a default grey!
+	setBackgroundColour(0.6f, 0.6f, 0.7f);
+
+	// enable fullscreen mode
+	fullScreen(true);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
 // called when we need to update the app. 'dt' is the time delta (the number of seconds since the last frame)
 //------------------------------------------------------------------------------------------------------------------------------------
-void update(float dt)
+void update(float /*dt*/)
 {
-	g_time += dt;
+	if(isKeyPressed(kKeyEscape))
+	{
+		exit(0);
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -56,42 +31,6 @@ void update(float dt)
 //------------------------------------------------------------------------------------------------------------------------------------
 void draw3D()
 {
-	// draw the grid on the floor
-	setColour(0.25f, 0.25f, 0.25f);
-	for(float i = -10.0f; i <= 10.1f; i += 1.0f)
-	{
-		Vec3 zmin(i, 0, -10);
-		Vec3 zmax(i, 0,  10);
-		Vec3 xmin(-10, 0, i);
-		Vec3 xmax(10, 0, i);
-		drawLine(xmin, xmax);
-		drawLine(zmin, zmax);
-	}
-
-	pushMatrix();
-		translate(-8.0f, 0, 0);
-		drawPrimitives(g_pointsV, 4, kQuads);
-	popMatrix();
-
-	pushMatrix();
-		translate(-3.0f, 0, 0);
-		drawPrimitives(g_pointsVC, 4, kQuads);
-	popMatrix();
-
-	enableLighting();
-		setColour(1.0f, 1.0f, 1.0f);
-
-		pushMatrix();
-			translate(3.0f, 0, 0);
-			drawPrimitives(g_pointsVN, 4, kQuads);
-		popMatrix();
-
-		pushMatrix();
-			translate(8.0f, 0, 0);
-			drawPrimitives(g_pointsVNC, 4, kQuads);
-		popMatrix();
-	disableLighting();
-
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -99,6 +38,7 @@ void draw3D()
 //------------------------------------------------------------------------------------------------------------------------------------
 void draw()
 {
+	drawText(-19.0f, 14.0f, "Press Escape to exit");
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
