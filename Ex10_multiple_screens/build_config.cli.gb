@@ -1,4 +1,4 @@
-NAME Ex08_drawingText
+NAME Ex10_multiple_screens
 DEPENDS libCGG
 SOURCE ./
 CONFIG
