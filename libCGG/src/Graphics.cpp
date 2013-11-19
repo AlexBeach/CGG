@@ -1,8 +1,55 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "cgg/Graphics.h"
 #include <Windows.h>
 #include <cstdint>
 #include <time.h>
+#include <stdarg.h>
 #include "GL/glut.h"
+#include "GL/freeglut_ext.h"
+
+void drawText(float x, float y, float z, const char string[], ...)
+{
+	char buffer[1024] = {0};
+	va_list args;
+	va_start(args, string);
+	vsprintf(buffer, string, args);
+	glRasterPos3f(x, y, z);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_10, (const unsigned char*)buffer);
+	va_end(args);
+}
+
+void drawText(float x, float y, const char string[], ...)
+{
+	char buffer[1024] = {0};
+	va_list args;
+	va_start(args, string);
+	vsprintf(buffer, string, args);
+	glRasterPos2f(x, y);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_10, (const unsigned char*)buffer);
+	va_end(args);
+}
+
+void drawText(const Vec2& pos, const char string[], ...)
+{
+	char buffer[1024] = {0};
+	va_list args;
+	va_start(args, string);
+	vsprintf(buffer, string, args);
+	glRasterPos2f(pos.x, pos.y);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_10, (const unsigned char*)buffer);
+	va_end(args);
+}
+
+void drawText(const Vec3& pos, const char string[], ...)
+{
+	char buffer[1024] = {0};
+	va_list args;
+	va_start(args, string);
+	vsprintf(buffer, string, args);
+	glRasterPos3f(pos.x, pos.y, pos.z);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_10, (const unsigned char*)buffer);
+	va_end(args);
+}
 
 int _g_currentObject = -1;
 

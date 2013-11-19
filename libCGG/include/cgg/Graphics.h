@@ -72,6 +72,33 @@ void drawShape(const Matrix2& matrix, int object);
 void drawShape(const Matrix3& matrix, int object);
 
 //------------------------------------------------------------------------------------------------------------------------------------
+// TEXT FUNCS
+//------------------------------------------------------------------------------------------------------------------------------------
+
+/// \brief	draws some text at the specified location 
+/// \param	x the x coordinate 
+/// \param	y the y coordinate 
+/// \param	string the format string
+void drawText(float x, float y, const char string[], ...);
+
+/// \brief	draws some text at the specified location 
+/// \param	x the x coordinate 
+/// \param	y the y coordinate 
+/// \param	z the z coordinate 
+/// \param	string the format string
+void drawText(float x, float y, float z, const char string[], ...);
+
+/// \brief	draws some text at the specified location 
+/// \param	pos the position of the text
+/// \param	string the format string
+void drawText(const Vec2& pos, const char string[], ...);
+
+/// \brief	draws some text at the specified location 
+/// \param	pos the position of the text
+/// \param	string the format string
+void drawText(const Vec3& pos, const char string[], ...);
+
+//------------------------------------------------------------------------------------------------------------------------------------
 // LIGHTING FUNCS
 //------------------------------------------------------------------------------------------------------------------------------------
 

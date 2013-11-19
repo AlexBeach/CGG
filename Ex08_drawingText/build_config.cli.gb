@@ -1,4 +1,4 @@
-NAME Ex08_test_maths
+NAME Ex08_drawingText
 DEPENDS libCGG
 SOURCE ./
 CONFIG
