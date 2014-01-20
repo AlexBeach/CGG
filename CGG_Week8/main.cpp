@@ -14,7 +14,7 @@ void init()
 	setScreenCoordinates(-20.0f, 20.0f, -15.0f, 15.0f);
 
 	// setting the background colour to a default grey!
-	setBackgroundColour(0.6f, 0.6f, 0.7f);
+	setBackgroundColour(1.0f, 1.0f, 1.0f);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -30,23 +30,26 @@ void update(float dt)
 //------------------------------------------------------------------------------------------------------------------------------------
 void drawParametricSurface()
 {
-	// the min/max parametric values for the surface
-	float umin = -12.0f;
-	float umax =  12.0f;
-	float vmin = -12.0f;
-	float vmax =  12.0f;
+	//// the min/max parametric values for the surface
+	//float umin = 0;
+	//float umax = 2*PI;
+	//float vmin = 0;
+	//float vmax = 2*PI;
 
-	for(float u = umin; u <= umax; u += 0.05f)
-	{
-		for(float v = vmin; v <= vmax; v += 0.05f)
-		{
-			Vec3 P;
-			P.x = u;
-			P.z = v;
-			P.y = 0;
-			drawPoint(P);
-		}
-	}
+	//for(float u = umin; u <= umax; u += 0.05f)
+	//{
+	//	for(float v = vmin; v <= vmax; v += 0.05f)
+	//	{
+	//		Vec3 P;
+	//		P.x = u;
+	//		P.y = 0;
+	//		P.z = v;
+
+	//		P.y = cos(length(P)-(tan(g_time)));
+
+	//		drawPoint(P);
+	//	}
+	//}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -54,21 +57,21 @@ void drawParametricSurface()
 //------------------------------------------------------------------------------------------------------------------------------------
 void draw3D()
 {
-	// draw the grid on the floor
-	setColour(0.25f, 0.25f, 0.25f);
-	for(float i = -10.0f; i <= 10.1f; i += 1.0f)
-	{
-		Vec3 zmin(i, 0, -10);
-		Vec3 zmax(i, 0,  10);
-		Vec3 xmin(-10, 0, i);
-		Vec3 xmax(10, 0, i);
-		drawLine(xmin, xmax);
-		drawLine(zmin, zmax);
-	}
+	//// draw the grid on the floor
+	//setColour(0.25f, 0.25f, 0.25f);
+	//for(float i = -10.0f; i <= 10.1f; i += 1.0f)
+	//{
+	//	Vec3 zmin(i, 0, -10);
+	//	Vec3 zmax(i, 0,  10);
+	//	Vec3 xmin(-10, 0, i);
+	//	Vec3 xmax(10, 0, i);
+	//	drawLine(xmin, xmax);
+	//	drawLine(zmin, zmax);
+	//}
 
-	// draws te plane
-	setColour(0.25f, 0.25f, 1.0f);
-	drawParametricSurface();
+	//// draws te plane
+	//setColour(0.25f, 0.25f, 1.0f);
+	//drawParametricSurface();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
