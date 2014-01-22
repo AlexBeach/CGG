@@ -1,6 +1,8 @@
 #include "cgg/Graphics.h"
 #include <iostream>
 
+//some new comment
+
 float g_time = 0;
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -9,14 +11,14 @@ float g_time = 0;
 void init()
 {
 	// give our app a title 
-	setWindowTitle("Hello App World!");
+	setWindowTitle("Great Golf Game");
 
-	// sets the size of the 2D screen coordinates. I'm just initialising the defaults here. You can use whatever you want!
+	// sets the size of the 2D screen coordinates. I'm just initialising the defaults here. You can use whatever you want
 	// args are: minx, maxx, miny, maxy
 	setScreenCoordinates(-20.0f, 20.0f, -15.0f, 15.0f);
 
-	// setting the background colour to a default grey!
-	setBackgroundColour(0.6f, 0.6f, 0.7f);
+	//Setting the background colour to a default grey.
+	setBackgroundColour(0.0f,0.75f,0.0f);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -32,8 +34,8 @@ void update(float dt)
 //------------------------------------------------------------------------------------------------------------------------------------
 void draw3D()
 {
-	// draw the grid on the floor
-	setColour(0.25f, 0.25f, 0.25f);
+// draw the grid on the floor
+/*	setColour(0.25f, 0.25f, 0.25f);
 	for(float i = -10.0f; i <= 10.1f; i += 1.0f)
 	{
 		Vec3 zmin(i, 0, -10);
@@ -42,7 +44,7 @@ void draw3D()
 		Vec3 xmax(10, 0, i);
 		drawLine(xmin, xmax);
 		drawLine(zmin, zmax);
-	}
+	}*/
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +53,6 @@ void draw3D()
 void draw()
 {
 	// draw something in 2D just so you can see it does actually work!
-	setColour(0.1f, 0.1f, 0.9f);
 	Vec2 topLeft(-19.5f, 14.5f);
 	Vec2 topRight(19.5f, 14.5f);
 	Vec2 bottomLeft(-19.5f, -14.5f);
