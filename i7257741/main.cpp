@@ -4,12 +4,10 @@
 #include <windows.h>
 #include <GL/GL.h>
 
-//some new comment
-
 float g_time = 0;
 
-Matrix2 GolfCoursePos,GolfCourseExtra1Pos,GolfCourseExtra2Pos,GolfCourseExtra3Pos;
-int GolfCourse,GolfCourseExtra1,GolfCourseExtra2,GolfCourseExtra3;
+Matrix2 GolfCoursePos,GolfCourseExtra1Pos,GolfCourseExtra2Pos,TreePos;
+int GolfCourse,GolfCourseExtra1,GolfCourseExtra2,Tree;
 
 //------------------------------------------------------------------------------------------------------------------------------------
 // called when we initialise the app
@@ -17,7 +15,7 @@ int GolfCourse,GolfCourseExtra1,GolfCourseExtra2,GolfCourseExtra3;
 void init()
 {
 	// give our app a title 
-	setWindowTitle("Great Golf Game");
+	setWindowTitle("My Amazing Golf Game");
 
 	// sets the size of the 2D screen coordinates. I'm just initialising the defaults here. You can use whatever you want
 	// args are: minx, maxx, miny, maxy
@@ -64,7 +62,7 @@ void init()
 		Vec2 (-10.0f,-12.0f),
 		Vec2 (-7.0f,-12.0f),
 		Vec2 (-6.0f,-14.0f),
-		Vec2 (-4.0f,-15.0f),		//35
+		Vec2 (-4.0f,-15.0f),	//35
 		Vec2 (-2.0f,-15.0f),
 		Vec2 (0.0f,-14.0f),
 		Vec2 (1.0f,-12.0f),
@@ -148,7 +146,49 @@ void init()
 
 	GolfCourseExtra2Pos.w.x=0.0f;
 	GolfCourseExtra2Pos.w.y=0.0f;
-}
+
+//	Tree=beginShape();
+//
+//	Vec2 TreePosPoints[] = 
+//	{
+//		Vec2 (0.0f,1.4f),
+//		Vec2 (0.4f,1.76f),
+//		Vec2 (1.0f,1.6f),
+//		Vec2 (1.2f,1.2f),
+//		Vec2 (1.2f,0.8f),		//5
+//		Vec2 (1.6f,0.6f),
+//		Vec2 (1.9f,0.3f),
+//		Vec2 (2.0f,-0.1f),
+//		Vec2 (1.8f,-0.4f),
+//		Vec2 (1.4f,-0.7f),		//10
+//		Vec2 (1.4f,-1.2f),
+//		Vec2 (1.2f,-1.6f),
+//		Vec2 (0.7f,-1.8f),
+//		Vec2 (0.1f,-1.5f),
+//		Vec2 (-0.4f,-1.7f),		//15
+//		Vec2 (-1.0f,-1.5f),
+//		Vec2 (-1.2f,-1.2f),
+//		Vec2 (-1.18f,-0.8f),
+//		Vec2 (-1.6f,-0.8f),
+//		Vec2 (-1.84f,-0.4f),	//20
+//		Vec2 (-2.0f,0.0f),
+//		Vec2 (-1.8f,0.4f),
+//		Vec2 (-1.4f,0.6f),
+//		Vec2 (-1.46f,1.0f),
+//		Vec2 (-1.3f,1.48f),		//25
+//		Vec2 (-0.82f,1.76f),
+//		Vec2 (-0.36f,1.64f),
+//		Vec2 (0.0f,1.4f),		//28=Fin
+//	};
+//
+//	setColour(0.0f,1.0f,0.0f);
+//	drawLineLoop(TreePosPoints,5);
+//
+//	endShape();
+//
+//	TreePos.w.x=0.0f;
+//	TreePos.w.y=0.0f;
+//}
 
 //------------------------------------------------------------------------------------------------------------------------------------
 // called when we need to update the app. 'dt' is the time delta (the number of seconds since the last frame)
@@ -176,6 +216,8 @@ void draw()
 	drawShape(GolfCoursePos,GolfCourse);
 	drawShape(GolfCourseExtra1Pos,GolfCourseExtra1);
 	drawShape(GolfCourseExtra2Pos,GolfCourseExtra2);
+	drawText(-19.0f, 15.0f, "Score: " );
+	drawShape(TreePos,Tree);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
