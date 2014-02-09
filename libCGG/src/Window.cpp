@@ -348,7 +348,7 @@ int runApp()
 	int argc = 1;
 	glutInit(&argc, foo);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(960, 800);
 	glutCreateWindow("3D Maths is even cooler....");
 	glutDisplayFunc(onDraw);
 	glutReshapeFunc(onReshape);
