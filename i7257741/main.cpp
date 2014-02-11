@@ -1,8 +1,8 @@
 #include "cgg/Graphics.h"
 #include <iostream>
-#define WIN_32_LEAN_AND_MEAN
+//#define WIN_32_LEAN_AND_MEAN
 #include <windows.h>
-#include <GL/GL.h>
+//#include <GL/GL.h>
 
 float g_time=0,GolfClubAim=0,BallPower=1;
 bool CanMove=true,PowerUp=false,SpaceKeyRelease=false;
@@ -23,8 +23,8 @@ float FindIntersect(Vec2 P,Vec2 D,Vec2 A,Vec2 B)
  	float Determinant=BA.x*D.y-BA.y*D.x;
  	if(fabs(Determinant)>0.00001f)
  	{
-		//Computes the distance along 'D' where the intersection occurs. 
- 		float Distance=(BA.y*(P.x-A.x)-BA.x*(P.y-A.y))/Determinant;
+		//Computes the distance along 'D' where the intersection occurs.
+ 		float DistanceD=(BA.y*(P.x-A.x)-BA.x*(P.y-A.y))/Determinant;
 
 		//Computes the distance along the line a->b where the intersection occurs.
  		float G;
@@ -32,23 +32,44 @@ float FindIntersect(Vec2 P,Vec2 D,Vec2 A,Vec2 B)
 		// avoid division by zero!
  		if(fabs(BA.x)>0.00001f)
  		{
- 			G=(P.x+(D.x*Distance)-A.x)/BA.x;
+ 			G=(P.x+(D.x*DistanceD)-A.x)/BA.x;
  		}
  		else
  		{
- 			G=(P.y+(D.y*Distance)-A.y)/BA.y;
+ 			G=(P.y+(D.y*DistanceD)-A.y)/BA.y;
  		}
 
 		//Collision occured if 'G' is between 0 and 1.
  		if((G>=0)&&(G<=1.0f))
  		{
- 			return Distance;
+ 			return DistanceD;
  		}
 	}
-
-	//No intersection found
- 	return -1;
+	else
+	{
+		//No intersection found
+ 		return -1;
+	}
  }
+
+//Matrix2 InverseMatrix(Matrix2 InverseMatrixMatrix)
+//{
+//	float AD=InverseMatrixMatrix.x.x*InverseMatrixMatrix.y.y;
+//	float BC=InverseMatrixMatrix.x.y*InverseMatrixMatrix.y.x;
+//
+//	Matrix2 Temp;
+//
+//	Temp.x.x=InverseMatrixMatrix.x.x;
+//	Temp.x.y=-InverseMatrixMatrix.x.y;
+//	Temp.y.x=-InverseMatrixMatrix.y.x;
+//	Temp.y.y=InverseMatrixMatrix.y.y;
+//		
+//	Temp.w=InverseMatrixMatrix.w;
+//	Temp.w=((1/(AD-BC))*(Temp.w));
+//	/*Temp.y*=(1/(AD-BC));*/
+//
+//	return Temp;
+//}
 
 Vec2 GolfCoursePoints[] = 
 {
@@ -120,7 +141,7 @@ Vec2 GolfCoursePoints[] =
 	Vec2 (-8.0f,-3.0f),		
 	Vec2 (-5.0f,-3.0f),
 	Vec2 (-5.0f,-1.0f),
-	Vec2 (-2.0f,-1.0f),		//69=Fin
+	//Vec2 (-2.0f,-1.0f),		//69=Fin
 };
 
 Vec2 GolfCourseExtra1Points[] = 
@@ -161,7 +182,7 @@ void init()
 	GolfCourse=beginShape();
 
 	setColour(1.0f,1.0f,1.0f);
-	drawLineLoop(GolfCoursePoints,69);
+	drawLineLoop(GolfCoursePoints,68);
 
 	endShape();
 
@@ -466,13 +487,13 @@ void update(float dt)
 	if(CanMove==true)
 	{
 		//Rotate ship right
-		if(isKeyPressed('d') || (isKeyPressed('D')))
+		if(isKeyPressed('d')||(isKeyPressed('D')))
 		{
 			GolfClubAim-=(AimSpeed/3.5);
 		}
 
 		//Rotate ship left
-		if(isKeyPressed('a') || (isKeyPressed('A')))
+		if(isKeyPressed('a')||(isKeyPressed('A')))
 		{
 			GolfClubAim+=(AimSpeed/3.5);
 		}
@@ -484,30 +505,61 @@ void update(float dt)
 			SpaceKeyRelease=true;
 		}
 
-		if(SpaceKeyRelease==true)
-		{
-			GolfBallPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-			PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-			PowerBarInner1Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-			PowerBarInner2Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-			PowerBarInner3Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-			PowerBarInner4Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-			PowerBarInner5Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-			BallPower-=10*dt;
-		}
-		else
-		{
-			if(BallPower<=20)
+		/*if(BallPower>0)
+		{*/
+			if(SpaceKeyRelease==true)
 			{
-				BallPower=BallPower+0.1;
+				GolfBallPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner1Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner2Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner3Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner4Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner5Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				BallPower-=2*dt;
 			}
-		}
+			else
+			{
+				if(BallPower<=20)
+				{
+					BallPower=BallPower+0.2;
+				}
+			}
 
-		if(BallPower<=0)
+			if(BallPower<=0)
+			{
+				CanMove=true;
+				GolfClubofSortsPos=GolfBallPos;
+			}
+		/*}*/
+
+		/*if(BallPower<0)
 		{
-			CanMove=true;
-			GolfClubofSortsPos=GolfBallPos;
-		}
+			if(SpaceKeyRelease==true)
+			{
+				GolfBallPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner1Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner2Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner3Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner4Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				PowerBarInner5Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+				BallPower+=2*dt;
+			}
+			else
+			{
+				if(BallPower>=-20)
+				{
+					BallPower=BallPower-0.2;
+				}
+			}
+
+			if(BallPower>=0)
+			{
+				CanMove=true;
+				GolfClubofSortsPos=GolfBallPos;
+			}
+		}*/
 	}
 
 	if((isKeyPressed(' ')==true)&&(CanMove==true))
@@ -518,31 +570,145 @@ void update(float dt)
 		SpaceKeyRelease=false;
 	}
 
-	//Transform the ball position and direction, by the inverse of the 
-	Vec2 P=inverseTransform(GolfBallPos,GolfBallPos.w);
-	Vec2 D=inverseRotate(GolfBallPos,GolfBallPos.y);
+	float Closest1=10000.0f;
 
-	//Loop through each line that makes up the wall
+	Vec2 N1;
+
 	for(int i=1;i<sizeof(GolfCoursePoints)/sizeof(Vec2);i++)
 	{
-		//These are the same two coordinates used to draw the line. 
-		float isect;
-		isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCoursePoints[i-1],GolfCoursePoints[i]);
-		//isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra1Points[i-1],GolfCourseExtra1Points[i]);
-		//isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra2Points[i-1],GolfCourseExtra2Points[i]);
+		// These are the same two coordinates used to draw the line. 
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCoursePoints[i-1],GolfCoursePoints[i]);
 
-		//If intersection found (e.g. distance returned is not negative)
-		if(isect>=0)
+		// if intersection found (e.g. distance returned is not negative!)
+		if(Isect>=0)
 		{
-			//We only care about the closest intersection
-			if(isect<=0.1f)
+			if(Isect<Closest1)
 			{
-				Matrix2 Temp=GolfBallPos;
-				GolfBallPos.x=Temp.y;
-				GolfBallPos.y=Temp.x;
+				Closest1=Isect;
+				Vec2 AB(GolfCoursePoints[i-1]-GolfCoursePoints[i]);
+				AB=normalize(AB);
+				N1.x=-AB.y;
+				N1.y=AB.x;
 			}
 		}
 	}
+
+	float Closest2=10000.0f;
+
+	Vec2 N2;
+
+	for(int i=1;i<sizeof(GolfCourseExtra1Points)/sizeof(Vec2);i++)
+	{
+		// These are the same two coordinates used to draw the line. 
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra1Points[i-1],GolfCourseExtra1Points[i]);
+
+		// if intersection found (e.g. distance returned is not negative!)
+		if(Isect>=0)
+		{
+			if(Isect<Closest2)
+			{
+				Closest2=Isect;
+				Vec2 AB(GolfCourseExtra1Points[i-1]-GolfCourseExtra1Points[i]);
+				AB=normalize(AB);
+				N2.x=-AB.y;
+				N2.y=AB.x;
+			}
+		}
+	}
+
+	float Closest3=10000.0f;
+
+	Vec2 N3;
+
+	for(int i=1;i<sizeof(GolfCourseExtra2Points)/sizeof(Vec2);i++)
+	{
+		// These are the same two coordinates used to draw the line. 
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra2Points[i-1],GolfCourseExtra2Points[i]);
+
+		// if intersection found (e.g. distance returned is not negative!)
+		if(Isect>=0)
+		{
+			if(Isect<Closest3)
+			{
+				Closest3=Isect;
+				Vec2 AB(GolfCourseExtra2Points[i-1]-GolfCourseExtra2Points[i]);
+				AB=normalize(AB);
+				N3.x=-AB.y;
+				N3.y=AB.x;
+			}
+		}
+	}
+
+	if(Closest1<(BallPower*dt))
+	{
+		GolfBallPos.y-=2*dot(N1,GolfBallPos.y)*N1;
+		GolfBallPos.x.x=GolfBallPos.y.y;
+		GolfBallPos.x.y=-GolfBallPos.y.x;
+	}
+
+	if(Closest2<(BallPower*dt))
+	{
+		GolfBallPos.y-=2*dot(N2,GolfBallPos.y)*N2;
+		GolfBallPos.x.x=GolfBallPos.y.y;
+		GolfBallPos.x.y=-GolfBallPos.y.x;
+	}
+
+	if(Closest3<(BallPower*dt))
+	{
+		GolfBallPos.y-=2*dot(N3,GolfBallPos.y)*N3;
+		GolfBallPos.x.x=GolfBallPos.y.y;
+		GolfBallPos.x.y=-GolfBallPos.y.x;
+	}
+
+	////Loop through each line that makes up the wall
+	//for(int i=1;i<sizeof(GolfCoursePoints)/sizeof(Vec2);i++)
+	//{
+	//	float isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCoursePoints[i-1],GolfCoursePoints[i]);
+	//	
+	//	//If intersection found (e.g. distance returned is not negative)
+	//	if(isect>=0)
+	//	{
+	//		//We only care about the closest intersection
+	//		if(isect<=0.2f)
+	//		{
+	//			GolfBallPos=InverseMatrix(GolfBallPos);
+	//			/*BallPower*=-BallPower;*/
+	//		}
+	//	}
+	//}
+
+	//for(int i=1;i<sizeof(GolfCourseExtra1Points)/sizeof(Vec2);i++)
+	//{
+	//	float isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra1Points[i-1],GolfCourseExtra1Points[i]);
+	//	
+	//	//If intersection found (e.g. distance returned is not negative)
+	//	if(isect>=0)
+	//	{
+	//		//We only care about the closest intersection
+	//		if(isect<=0.2f)
+	//		{
+	//			GolfBallPos=InverseMatrix(GolfBallPos);
+	//			/*BallPower*=-BallPower;*/
+	//		}
+	//	}
+	//}
+
+	//for(int i=1;i<sizeof(GolfCourseExtra2Points)/sizeof(Vec2);i++)
+	//{
+	//	float isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra2Points[i-1],GolfCourseExtra2Points[i]);
+	//	
+	//	//If intersection found (e.g. distance returned is not negative)
+
+	//	if(isect>=0)
+	//	{
+	//		//We only care about the closest intersection
+	//		if(isect<=0.2f)
+	//		{
+	//			GolfBallPos=InverseMatrix(GolfBallPos);
+	//			/*BallPower*=-BallPower;*/
+	//		}
+	//	}
+	//}
 
 	if(isKeyPressed(kKeyEscape)==true)
 	{
@@ -563,7 +729,7 @@ void draw3D()
 //------------------------------------------------------------------------------------------------------------------------------------
 void draw()
 {
-	glLineWidth(4.0);
+	/*glLineWidth(4.0);*/
 
 	drawShape(GolfCoursePos,GolfCourse);
 	drawShape(GolfCourseExtra1Pos,GolfCourseExtra1);
