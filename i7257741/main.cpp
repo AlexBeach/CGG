@@ -141,7 +141,7 @@ Vec2 GolfCoursePoints[] =
 	Vec2 (-8.0f,-3.0f),		
 	Vec2 (-5.0f,-3.0f),
 	Vec2 (-5.0f,-1.0f),
-	//Vec2 (-2.0f,-1.0f),		//69=Fin
+	Vec2 (-2.0f,-1.0f),		//69=Fin
 };
 
 Vec2 GolfCourseExtra1Points[] = 
@@ -156,13 +156,13 @@ Vec2 GolfCourseExtra1Points[] =
 };
 
 Vec2 GolfCourseExtra2Points[] = 
-	{
-		Vec2 (5.0f,5.0f),
-		Vec2 (7.0f,5.0f),
-		Vec2 (7.0f,4.0f),
-		Vec2 (5.0f,4.0f),
-		Vec2 (5.0f,5.0f),	//5 and 5=Fin
-	};
+{
+	Vec2 (5.0f,5.0f),
+	Vec2 (7.0f,5.0f),
+	Vec2 (7.0f,4.0f),
+	Vec2 (5.0f,4.0f),
+	Vec2 (5.0f,5.0f),	//5 and 5=Fin
+};
 
 //------------------------------------------------------------------------------------------------------------------------------------
 // called when we initialise the app
@@ -182,7 +182,7 @@ void init()
 	GolfCourse=beginShape();
 
 	setColour(1.0f,1.0f,1.0f);
-	drawLineLoop(GolfCoursePoints,68);
+	drawLineLoop(GolfCoursePoints,69);
 
 	endShape();
 
@@ -248,13 +248,13 @@ void init()
 
 	//endShape();
 
-	TreePos.w=(9.0f,9.0f);
+	//TreePos.w=(9.0f,9.0f);
 
 	HoleWin=beginShape();
 
-	for(float angle = -PI; angle <= PI; angle += 0.05)
+	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
 	{
-		Vec2 p(cos(angle)/3, sin(angle)/3);
+		Vec2 p(cos(Angle)/3,sin(Angle)/3);
 		setColour(0.0f,0.0f,0.0f);
 		drawPoint(p);
 	}
@@ -266,9 +266,9 @@ void init()
 
 	HolePortal1=beginShape();
 
-	for(float angle = -PI; angle <= PI; angle += 0.05)
+	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
 	{
-		Vec2 p(cos(angle)/3, sin(angle)/3);
+		Vec2 p(cos(Angle)/3,sin(Angle)/3);
 		setColour(1.0f,0.0f,1.0f);
 		drawPoint(p);
 	}
@@ -280,9 +280,9 @@ void init()
 
 	HolePortal2=beginShape();
 
-	for(float angle = -PI; angle <= PI; angle += 0.05)
+	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
 	{
-		Vec2 p(cos(angle)/3, sin(angle)/3);
+		Vec2 p(cos(Angle)/3, sin(Angle)/3);
 		setColour(1.0f,0.0f,1.0f);
 		drawPoint(p);
 	}
@@ -294,9 +294,9 @@ void init()
 
 	HolePortal3=beginShape();
 
-	for(float angle = -PI; angle <= PI; angle += 0.05)
+	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
 	{
-		Vec2 p(cos(angle)/3, sin(angle)/3);
+		Vec2 p(cos(Angle)/3,sin(Angle)/3);
 		setColour(1.0f,0.0f,1.0f);
 		drawPoint(p);
 	}
@@ -308,9 +308,9 @@ void init()
 
 	HolePortal4=beginShape();
 
-	for(float angle = -PI; angle <= PI; angle += 0.05)
+	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
 	{
-		Vec2 p(cos(angle)/3, sin(angle)/3);
+		Vec2 p(cos(Angle)/3,sin(Angle)/3);
 		setColour(1.0f,0.0f,1.0f);
 		drawPoint(p);
 	}
@@ -320,7 +320,7 @@ void init()
 	HolePortal4Pos.w.x=-2.6f;
 	HolePortal4Pos.w.y=0.0f;
 
-	//For the arrow to show the current angle that the ball's direction will go in
+	//For the arrow to show the current Angle that the ball's direction will go in
 	GolfClubofSorts = beginShape();
 		
 		Vec2 ClubPoints[] = 
@@ -345,9 +345,9 @@ void init()
 	//For the Golf Ball
 	GolfBall=beginShape();
 
-		for(float angle = -PI; angle <= PI; angle += 0.05)
+		for(float Angle = -PI; Angle <= PI; Angle += 0.05)
 		{
-			Vec2 p(cos(angle)/5, sin(angle)/5);
+			Vec2 p(cos(Angle)/5, sin(Angle)/5);
 			setColour(1.0f,1.0f,1.0f);
 			drawPoint(p);
 		}
@@ -503,6 +503,7 @@ void update(float dt)
 		if((isKeyPressed(' ')==false)&&(SpaceKeyRelease==false))
 		{
 			SpaceKeyRelease=true;
+			Strokes++;
 		}
 
 		/*if(BallPower>0)
@@ -570,7 +571,7 @@ void update(float dt)
 		SpaceKeyRelease=false;
 	}
 
-	float Closest1=10000.0f;
+	float Closest1=1.0f;
 
 	Vec2 N1;
 
@@ -579,7 +580,7 @@ void update(float dt)
 		// These are the same two coordinates used to draw the line. 
 		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCoursePoints[i-1],GolfCoursePoints[i]);
 
-		// if intersection found (e.g. distance returned is not negative!)
+		// if intersection found (e.g. distance returned is not negative)
 		if(Isect>=0)
 		{
 			if(Isect<Closest1)
@@ -602,7 +603,7 @@ void update(float dt)
 		// These are the same two coordinates used to draw the line. 
 		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra1Points[i-1],GolfCourseExtra1Points[i]);
 
-		// if intersection found (e.g. distance returned is not negative!)
+		// if intersection found (e.g. distance returned is not negative)
 		if(Isect>=0)
 		{
 			if(Isect<Closest2)
@@ -625,7 +626,7 @@ void update(float dt)
 		// These are the same two coordinates used to draw the line. 
 		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra2Points[i-1],GolfCourseExtra2Points[i]);
 
-		// if intersection found (e.g. distance returned is not negative!)
+		// if intersection found (e.g. distance returned is not negative)
 		if(Isect>=0)
 		{
 			if(Isect<Closest3)
@@ -656,6 +657,36 @@ void update(float dt)
 	if(Closest3<(BallPower*dt))
 	{
 		GolfBallPos.y-=2*dot(N3,GolfBallPos.y)*N3;
+		GolfBallPos.x.x=GolfBallPos.y.y;
+		GolfBallPos.x.y=-GolfBallPos.y.x;
+	}
+
+	float Closest4=1.0f;
+
+	Vec2 N4;
+
+	for(int i=1;;i++)
+	{
+		// These are the same two coordinates used to draw the line. 
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,HoleWin[i-1],HoleWin[i]);
+
+		// if intersection found (e.g. distance returned is not negative)
+		if(Isect>=0)
+		{
+			if(Isect<Closest4)
+			{
+				Closest4=Isect;
+				Vec2 AB(HoleWin[i-1]-HoleWin[i]);
+				AB=normalize(AB);
+				N4.x=-AB.y;
+				N4.y=AB.x;
+			}
+		}
+	}
+
+	if(Closest4<(BallPower*dt))
+	{
+		GolfBallPos.y-=2*dot(N4,GolfBallPos.y)*N4;
 		GolfBallPos.x.x=GolfBallPos.y.y;
 		GolfBallPos.x.y=-GolfBallPos.y.x;
 	}
