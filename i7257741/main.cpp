@@ -6,12 +6,13 @@
 #include <time.h>
 
 float g_time=0,GolfClubAim=0,BallPower=1;
-bool CanMove=true,PowerUp=false,SpaceKeyRelease=false,Win=false,Portal=false;
+bool CanMove=true,PowerUp=false,SpaceKeyRelease=false,Win=false,Portal=false,Help=false,
+Cheat=false;
 Matrix2 GolfCoursePos,GolfCourseExtra1Pos,GolfCourseExtra2Pos,TreePos,HoleWinPos,
 GolfBallPos,GolfClubofSortsPos,HolePortal1Pos,HolePortal2Pos,HolePortal3Pos,HolePortal4Pos,
 PowerBarOuterPos,PowerBarInner1Pos,PowerBarInner2Pos,PowerBarInner3Pos,PowerBarInner4Pos,
-PowerBarInner5Pos,HoleWinCollisionPos,HoleCollision1Pos,HoleCollision2Pos,HoleCollision3Pos
-,HoleCollision4Pos;
+PowerBarInner5Pos,HoleWinCollisionPos,HoleCollision1Pos,HoleCollision2Pos,HoleCollision3Pos,
+HoleCollision4Pos;
 int GolfCourse,GolfCourseExtra1,GolfCourseExtra2,Tree,HoleWin,GolfBall,GolfClubofSorts,
 Score=0,Strokes=0,Par=5,HolePortal1,HolePortal2,HolePortal3,HolePortal4,PowerBarOuter,
 PowerBarInner1,PowerBarInner2,PowerBarInner3,PowerBarInner4,PowerBarInner5,HoleWinCollision,
@@ -223,9 +224,12 @@ void init()
 	// sets the size of the 2D screen coordinates. I'm just initialising the defaults here. You can use whatever you want
 	// args are: minx, maxx, miny, maxy
 	setScreenCoordinates(-20.0f, 20.0f, -16.0f, 16.0f);
+	/*setScreenCoordinates(-32.0f, 32.0f, -18.0f, 18.0f);*/
 
 	//Setting the background colour to a default grey.
 	setBackgroundColour(0.0f,0.75f,0.0f);
+
+	/*fullScreen(true);*/
 
 	GolfCourse=beginShape();
 
@@ -583,7 +587,7 @@ void update(float dt)
 
 	float AimSpeed=TWO_PI*dt;
 
-	if((CanMove==true)&&(Win==false))
+	if((CanMove==true)&&(Win==false)&&(Help==false))
 	{
 		//Rotate ship right
 		if(isKeyPressed('d')||(isKeyPressed('D')))
@@ -599,15 +603,16 @@ void update(float dt)
 	}
 	else
 	{
-		if((isKeyPressed(' ')==false)&&(SpaceKeyRelease==false)&&(Win==false))
+		if((isKeyPressed(' ')==false)&&(SpaceKeyRelease==false)&&(Win==false)&&(Help==false))
 		{
 			SpaceKeyRelease=true;
+			Portal=false;
 			Strokes++;
 		}
 
 		/*if(BallPower>0)
 		{*/
-		if((SpaceKeyRelease==true)&&(Win==false))
+		if((SpaceKeyRelease==true)&&(Win==false)&&(Help==false))
 		{
 			GolfBallPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
 			PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
@@ -620,13 +625,13 @@ void update(float dt)
 		}
 		else
 		{
-			if((BallPower<=20)&&(Win==false))
+			if((BallPower<=20)&&(Win==false)&&(Help==false))
 			{
 				BallPower=BallPower+0.2;
 			}
 		}
 
-		if((BallPower<=0)&&(Win==false))
+		if((BallPower<=0)&&(Win==false)&&(Help==false))
 		{
 			CanMove=true;
 			GolfClubofSortsPos=GolfBallPos;
@@ -662,13 +667,12 @@ void update(float dt)
 		}*/
 	}
 
-	if((isKeyPressed(' ')==true)&&(CanMove==true)&&(Win==false))
+	if((isKeyPressed(' ')==true)&&(CanMove==true)&&(Win==false)&&(Help==false))
 	{
 		GolfBallPos=GolfClubofSortsPos;
 		BallPower=1;
 		CanMove=false;
 		SpaceKeyRelease=false;
-		Portal=false;
 	}
 
 	float Closest1=10000.0f;
@@ -746,6 +750,7 @@ void update(float dt)
 		GolfBallPos.x.x=GolfBallPos.y.y;
 		GolfBallPos.x.y=-GolfBallPos.y.x;
 		BallPower=BallPower-0.2;
+		Portal=false;
 	}
 
 	if(Closest2<(BallPower*dt))
@@ -754,6 +759,7 @@ void update(float dt)
 		GolfBallPos.x.x=GolfBallPos.y.y;
 		GolfBallPos.x.y=-GolfBallPos.y.x;
 		BallPower=BallPower-0.2;
+		Portal=false;
 	}
 
 	if(Closest3<(BallPower*dt))
@@ -762,6 +768,7 @@ void update(float dt)
 		GolfBallPos.x.x=GolfBallPos.y.y;
 		GolfBallPos.x.y=-GolfBallPos.y.x;
 		BallPower=BallPower-0.2;
+		Portal=false;
 	}
 
 	float Closest4=10000.0f;
@@ -1003,6 +1010,39 @@ void update(float dt)
 	//	}
 	//}
 
+	if((isKeyPressed('r'))||(isKeyPressed('R')))
+	{
+		Win=false;
+		CanMove=true;
+		Help=false;
+		SpaceKeyRelease=false;
+		Portal=false;
+		Score=0;
+		Strokes=0;
+		GolfBallPos.w.x=-3.0f;
+		GolfBallPos.w.y=11.0f;
+		BallPower=0;
+		GolfClubAim=0;
+		GolfClubofSortsPos.w.x=-3.0f;
+		GolfClubofSortsPos.w.y=11.0f;
+		PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+		PowerBarInner1Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+		PowerBarInner2Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+		PowerBarInner3Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+		PowerBarInner4Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+		PowerBarInner5Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+	}
+
+	if(isKeyPressed(kKeyF1)==true)
+	{
+		Help=true;
+	}
+
+	if((Help==true)&&(isKeyPressed(kKeyBackSpace)))
+	{
+		Help=false;
+	}
+	
 	if(isKeyPressed(kKeyEscape)==true)
 	{
 		exit(0);
@@ -1022,29 +1062,38 @@ void draw3D()
 //------------------------------------------------------------------------------------------------------------------------------------
 void draw()
 {
-	/*glLineWidth(4.0);*/
+	glLineWidth(4.0);
 
-	drawShape(GolfCoursePos,GolfCourse);
-	drawShape(GolfCourseExtra1Pos,GolfCourseExtra1);
-	drawShape(GolfCourseExtra2Pos,GolfCourseExtra2);
-	drawShape(TreePos,Tree);
-	drawShape(HoleWinPos,HoleWin);
-	drawShape(HoleWinCollisionPos,HoleWinCollision);
-	drawShape(HolePortal1Pos,HolePortal1);
-	drawShape(HoleCollision1Pos,HoleCollision1);
-	drawShape(HolePortal2Pos,HolePortal2);
-	drawShape(HoleCollision2Pos,HoleCollision2);
-	drawShape(HolePortal3Pos,HolePortal3);
-	drawShape(HoleCollision3Pos,HoleCollision3);
-	drawShape(HolePortal4Pos,HolePortal4);
-	drawShape(HoleCollision4Pos,HoleCollision4);
-
-	if(CanMove==true)
+	if(Help==false)
 	{
+		drawShape(GolfCoursePos,GolfCourse);
+		drawShape(GolfCourseExtra1Pos,GolfCourseExtra1);
+		drawShape(GolfCourseExtra2Pos,GolfCourseExtra2);
+		drawShape(TreePos,Tree);
+		drawShape(HoleWinPos,HoleWin);
+		drawShape(HoleWinCollisionPos,HoleWinCollision);drawShape(HolePortal1Pos,HolePortal1);
+		drawShape(HoleCollision1Pos,HoleCollision1);
+		drawShape(HolePortal2Pos,HolePortal2);
+		drawShape(HoleCollision2Pos,HoleCollision2);
+		drawShape(HolePortal3Pos,HolePortal3);
+		drawShape(HoleCollision3Pos,HoleCollision3);
+		drawShape(HolePortal4Pos,HolePortal4);
+		drawShape(HoleCollision4Pos,HoleCollision4);
+
+		setColour(1.0f,1.0f,1.0f);
+		drawText(16.6,15.2,"Hit F1 for help.");
+	}
+
+	if((CanMove==true)&&(Help==false))
+	{
+		glLineWidth(2.0);
+		setColour(0.0f, 1.0f, 0.0f);
 		drawShape(GolfClubofSortsPos,GolfClubofSorts);
 	}
-	if((isKeyPressed(' ')==true)&&(SpaceKeyRelease==false))
+
+	if((isKeyPressed(' ')==true)&&(SpaceKeyRelease==false)&&(Help==false))
 	{
+		glLineWidth(2.0);
 		drawShape(PowerBarOuterPos,PowerBarOuter);
 
 		if(BallPower>=1)
@@ -1078,19 +1127,59 @@ void draw()
 		}
 	}
 
-	drawShape(GolfBallPos,GolfBall);
-	drawText(-19.5f,15.2f,"Score: %i",Score);
-	drawText(-19.5f,14.7f,"Strokes: %i",Strokes);
-	drawText(13.4f,15.2f,"Press 'a' to turn anti-clockwise");
-	drawText(14.4f,14.7f,"Press 'd' to turn clockwise");
-	drawText(9.5f,14.2f,"Press and hold the Space key to increase the power");
-	drawText(11.7f,13.7f,"Release the Space key to hit the golf ball");
+	if(Help==false)
+	{
+		drawShape(GolfBallPos,GolfBall);
+		drawText(-19.5f,15.2f,"Score: %i",Score);
+		drawText(-19.5f,14.7f,"Strokes: %i",Strokes);
+		drawText(-19.5f,14.2f,"Par=%i",Par);
+	}
+	
+	if(Help==true)
+	{
+		setColour(1.0f, 1.0f, 1.0f);
+		drawText(-7.5f,13.6f,"CONTROLS");
+		drawText(-7.5f,13.5f,"_________");
+		drawText(-8.0f,12.7f,"- Press and hold the 'A' key to turn anti-clockwise");
+		drawText(-8.0f,11.9f,"- Press and hold the 'D' key to turn clockwise");
+		drawText(-8.0f,11.1f,"- Press and hold the Space key to increase the power");
+		drawText(-8.0f,10.3f,"- Release the Space key to hit the golf ball");
+		drawText(-8.0f,9.5f,"- Press the Escape (Esc) key to exit the game.");
+		drawText(-8.0f,8.7f,"- Press the 'R' key to restart the game.");
+		drawText(-8.0f,7.9f,"- Press the BackSpace key to exit the help page and return to the game.");
+		drawText(-7.5f,6.1f,"INSTRUCTIONS");
+		drawText(-7.5f,6.0f,"_____________");
+		drawText(-8.0f,5.2f,"- The aim of the game is to get your ball into the final hole (the black one)");
+		drawText(-8.0f,4.4f,"  in as few strokes as possible (Therefore, the lower your score, the better).");
+		drawText(-8.0f,3.6f,"- Your score is deterined by how many strokes, it takes you to get your ball");
+		drawText(-8.0f,2.8f,"	into the hole, minus the course's set par.");
+		drawText(-8.0f,2.0f,"- For this course par is 5.");
+		drawText(-8.0f,1.2f,"- Par is the number of strokes a good player should normally require for a course.");
+		drawText(-8.0f,0.4f,"- The four purple coloured holes towards the centre of the course are portals.");
+		drawText(-8.0f,-0.4f,"- A portal will transport your ball to any of the portals (even your current portal).");
+		drawText(-8.0f,-1.2f,"- To enter a portal, simply bit your ball to it, in the same way you'd put your ball");
+		drawText(-8.0f,-2.0f,"	(Your exit portal is random).");
+		drawText(-8.0f,-2.8f,"- Be careful when entering a portal, you exit a portal just as fast as you entered.");
+		drawText(-7.5f,-4.6f,"SCORING");
+		drawText(-7.5f,-4.7f,"________");
+		drawText(-8.0f,-5.5f,"- Albatross: 3 under par. You're absolutely stunning at crazy golf. Score = -3.");
+		drawText(-8.0f,-6.3f,"- Eagle: 2 under par. You're very much exceptional at crazy golf. Score = -2.");
+		drawText(-8.0f,-7.1f,"- Birdie: 1 under par. You're pretty remarkable at crazy golf. Score = -1");
+		drawText(-8.0f,-7.9f,"- Par: Par. You are very much average at crazy golf. Score = 0");
+		drawText(-8.0f,-8.7f,"- Bogie: 1 over par. You're not great at crazy golf. Score = +1");
+		drawText(-8.0f,-9.5f,"- Double-Bogie: 2 over par. You're woeful at crazy golf. Score = +2");
+		drawText(-8.0f,-10.3f,"- Triple-Bogie: 3 over par. You're utterly atrocious at crazy golf. Score = +3");
+		drawText(-8.0f,-11.1f,"- If you happen to put your ball in less than 3 under par strokes, then well done");
+		drawText(-8.0f,-11.9f,"	  but there isn't a name for this and your score will be your strokes minus par");
+		drawText(-8.0f,-12.7f,"- If you happen to put your ball in more than 3 over par, there isn't a name");
+		drawText(-8.0f,-13.5f,"	  for this but it means that you're terrible. Your score will be your strokes minus par.");
+	}
 
-	if(Win==true)
+	if((Win==true)&&(Help==false))
 	{
 		setColour(0.0f,0.0f,0.0f);
 
-		if(Strokes==(Par-4))
+		if(Strokes<=(Par-4))
 		{
 			drawText(-1.7f,0.5f,"@%#& Me!!!! You're ");
 			drawText(-1.7f,0.0f,"amazing! Go play a");
@@ -1098,7 +1187,7 @@ void draw()
 		}
 		else if(Strokes==(Par-3))
 		{
-			drawText(-1.1f,0.25f,"Albatross!!!.");
+			drawText(-1.1f,0.25f,"Albatross!!!");
 			drawText(-1.0f,-0.25f,"Fantastic!.");
 		}
 		else if(Strokes==(Par-2))
