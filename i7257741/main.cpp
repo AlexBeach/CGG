@@ -1,18 +1,21 @@
 #include "cgg/Graphics.h"
 #include <iostream>
-//#define WIN_32_LEAN_AND_MEAN
+#define WIN_32_LEAN_AND_MEAN
 #include <windows.h>
-//#include <GL/GL.h>
+#include <GL/GL.h>
+#include <time.h>
 
 float g_time=0,GolfClubAim=0,BallPower=1;
-bool CanMove=true,PowerUp=false,SpaceKeyRelease=false;
+bool CanMove=true,PowerUp=false,SpaceKeyRelease=false,Win=false,Portal=false;
 Matrix2 GolfCoursePos,GolfCourseExtra1Pos,GolfCourseExtra2Pos,TreePos,HoleWinPos,
 GolfBallPos,GolfClubofSortsPos,HolePortal1Pos,HolePortal2Pos,HolePortal3Pos,HolePortal4Pos,
 PowerBarOuterPos,PowerBarInner1Pos,PowerBarInner2Pos,PowerBarInner3Pos,PowerBarInner4Pos,
-PowerBarInner5Pos;
+PowerBarInner5Pos,HoleWinCollisionPos,HoleCollision1Pos,HoleCollision2Pos,HoleCollision3Pos
+,HoleCollision4Pos;
 int GolfCourse,GolfCourseExtra1,GolfCourseExtra2,Tree,HoleWin,GolfBall,GolfClubofSorts,
-Score=0,Strokes=0,HolePortal1,HolePortal2,HolePortal3,HolePortal4,PowerBarOuter,
-PowerBarInner1,PowerBarInner2,PowerBarInner3,PowerBarInner4,PowerBarInner5;
+Score=0,Strokes=0,Par=5,HolePortal1,HolePortal2,HolePortal3,HolePortal4,PowerBarOuter,
+PowerBarInner1,PowerBarInner2,PowerBarInner3,PowerBarInner4,PowerBarInner5,HoleWinCollision,
+HoleCollision1,HoleCollision2,HoleCollision3,HoleCollision4,PortalNum=0;
 
 float FindIntersect(Vec2 P,Vec2 D,Vec2 A,Vec2 B)
 {
@@ -71,7 +74,7 @@ float FindIntersect(Vec2 P,Vec2 D,Vec2 A,Vec2 B)
 //	return Temp;
 //}
 
-Vec2 GolfCoursePoints[] = 
+Vec2 GolfCoursePoints[]=
 {
 	Vec2 (-2.0f,-1.0f),
 	Vec2 (-2.0f,1.0f),
@@ -144,7 +147,7 @@ Vec2 GolfCoursePoints[] =
 	Vec2 (-2.0f,-1.0f),		//69=Fin
 };
 
-Vec2 GolfCourseExtra1Points[] = 
+Vec2 GolfCourseExtra1Points[]=
 {
 	Vec2 (-2.0f,7.0f),
 	Vec2 (0.0f,8.0f),
@@ -155,13 +158,58 @@ Vec2 GolfCourseExtra1Points[] =
 	Vec2 (-2.0f,7.0f),		//7=Fin
 };
 
-Vec2 GolfCourseExtra2Points[] = 
+Vec2 GolfCourseExtra2Points[]=
 {
 	Vec2 (5.0f,5.0f),
 	Vec2 (7.0f,5.0f),
 	Vec2 (7.0f,4.0f),
 	Vec2 (5.0f,4.0f),
 	Vec2 (5.0f,5.0f),	//5 and 5=Fin
+};
+
+Vec2 HoleWinCollisionPoints[]=
+{
+	Vec2 (-3.2f,-11.2f),
+	Vec2 (-2.8f,-11.2f),
+	Vec2 (-2.8f,-10.8f),
+	Vec2 (-3.2f,-10.8f),
+	Vec2 (-3.2f,-11.2f),	//5 and 5=Fin
+};
+
+Vec2 HoleCollision1Points[]=
+{
+	Vec2 (0.2f,1.75f),
+	Vec2 (-0.2f,1.75f),
+	Vec2 (-0.2f,1.35f),
+	Vec2 (0.2f,1.35f),
+	Vec2 (0.2f,1.75f),	//5 and 5=Fin
+};
+
+Vec2 HoleCollision2Points[]=
+{
+	Vec2 (2.8f,0.2f),
+	Vec2 (2.4f,0.2f),
+	Vec2 (2.4f,-0.2f),
+	Vec2 (2.8f,-0.2f),
+	Vec2 (2.8f,0.2f),	//5 and 5=Fin
+};
+
+Vec2 HoleCollision3Points[]=
+{
+	Vec2 (0.2f,-1.75f),
+	Vec2 (-0.2f,-1.75f),
+	Vec2 (-0.2f,-1.35f),
+	Vec2 (0.2f,-1.35f),
+	Vec2 (0.2f,-1.75f),	//5 and 5=Fin
+};
+
+Vec2 HoleCollision4Points[]=
+{
+	Vec2 (-2.8f,0.2f),
+	Vec2 (-2.4f,0.2f),
+	Vec2 (-2.4f,-0.2f),
+	Vec2 (-2.8f,-0.2f),
+	Vec2 (-2.8f,0.2f),	//5 and 5=Fin
 };
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -181,8 +229,8 @@ void init()
 
 	GolfCourse=beginShape();
 
-	setColour(1.0f,1.0f,1.0f);
-	drawLineLoop(GolfCoursePoints,69);
+		setColour(1.0f,1.0f,1.0f);
+		drawLineLoop(GolfCoursePoints,69);
 
 	endShape();
 
@@ -191,8 +239,8 @@ void init()
 
 	GolfCourseExtra1=beginShape();
 
-	setColour(1.0f,1.0f,1.0f);
-	drawLineLoop(GolfCourseExtra1Points,7);
+		setColour(1.0f,1.0f,1.0f);
+		drawLineLoop(GolfCourseExtra1Points,7);
 
 	endShape();
 
@@ -201,8 +249,8 @@ void init()
 
 	GolfCourseExtra2=beginShape();
 
-	setColour(1.0f,1.0f,1.0f);
-	drawLineLoop(GolfCourseExtra2Points,5);
+		setColour(1.0f,1.0f,1.0f);
+		drawLineLoop(GolfCourseExtra2Points,5);
 
 	endShape();
 
@@ -252,73 +300,124 @@ void init()
 
 	HoleWin=beginShape();
 
-	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
-	{
-		Vec2 p(cos(Angle)/3,sin(Angle)/3);
-		setColour(0.0f,0.0f,0.0f);
-		drawPoint(p);
-	}
+		for(float Angle=-PI;Angle<=PI;Angle+=0.05)
+		{
+			Vec2 p(cos(Angle)/3,sin(Angle)/3);
+			setColour(0.0f,0.0f,0.0f);
+			drawPoint(p);
+		}
 
 	endShape();
 
 	HoleWinPos.w.x=-3.0f;
 	HoleWinPos.w.y=-11.0f;
 
+	HoleWinCollision=beginShape();
+
+		setColour(0.0f,0.75f,0.0f);
+		drawLineLoop(HoleWinCollisionPoints,5);
+
+	endShape();
+
+	HoleWinCollisionPos.w.x=0.0f;
+	HoleWinCollisionPos.w.y=0.0f;
+
 	HolePortal1=beginShape();
 
-	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
-	{
-		Vec2 p(cos(Angle)/3,sin(Angle)/3);
-		setColour(1.0f,0.0f,1.0f);
-		drawPoint(p);
-	}
+		for(float Angle=-PI;Angle<=PI;Angle+=0.05)
+		{
+			Vec2 p(cos(Angle)/3,sin(Angle)/3);
+			setColour(1.0f,0.0f,1.0f);
+			drawPoint(p);
+		}
 
 	endShape();
 
 	HolePortal1Pos.w.x=0.0f;
 	HolePortal1Pos.w.y=1.55f;
 
+	HoleCollision1=beginShape();
+
+		setColour(0.0f,0.75f,0.0f);
+		drawLineLoop(HoleCollision1Points,5);
+
+	endShape();
+
+	HoleCollision1Pos.w.x=0.0f;
+	HoleCollision1Pos.w.y=0.0f;
+
 	HolePortal2=beginShape();
 
-	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
-	{
-		Vec2 p(cos(Angle)/3, sin(Angle)/3);
-		setColour(1.0f,0.0f,1.0f);
-		drawPoint(p);
-	}
+		for(float Angle=-PI;Angle<=PI;Angle+=0.05)
+		{
+			Vec2 p(cos(Angle)/3, sin(Angle)/3);
+			setColour(1.0f,0.0f,1.0f);
+			drawPoint(p);
+		}
 
 	endShape();
 
 	HolePortal2Pos.w.x=2.6f;
 	HolePortal2Pos.w.y=0.0f;
 
+	HoleCollision2=beginShape();
+
+		setColour(0.0f,0.75f,0.0f);
+		drawLineLoop(HoleCollision2Points,5);
+
+	endShape();
+
+	HoleCollision2Pos.w.x=0.0f;
+	HoleCollision2Pos.w.y=0.0f;
+
 	HolePortal3=beginShape();
 
-	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
-	{
-		Vec2 p(cos(Angle)/3,sin(Angle)/3);
-		setColour(1.0f,0.0f,1.0f);
-		drawPoint(p);
-	}
+		for(float Angle=-PI;Angle<=PI;Angle+=0.05)
+		{
+			Vec2 p(cos(Angle)/3,sin(Angle)/3);
+			setColour(1.0f,0.0f,1.0f);
+			drawPoint(p);
+		}
 
 	endShape();
 
 	HolePortal3Pos.w.x=0.0f;
 	HolePortal3Pos.w.y=-1.55f;
 
+	HoleCollision3=beginShape();
+
+		setColour(0.0f,0.75f,0.0f);
+		drawLineLoop(HoleCollision3Points,5);
+
+	endShape();
+
+	HoleCollision3Pos.w.x=0.0f;
+	HoleCollision3Pos.w.y=0.0f;
+
+
 	HolePortal4=beginShape();
 
-	for(float Angle=-PI;Angle<=PI;Angle+=0.05)
-	{
-		Vec2 p(cos(Angle)/3,sin(Angle)/3);
-		setColour(1.0f,0.0f,1.0f);
-		drawPoint(p);
-	}
+		for(float Angle=-PI;Angle<=PI;Angle+=0.05)
+		{
+			Vec2 p(cos(Angle)/3,sin(Angle)/3);
+			setColour(1.0f,0.0f,1.0f);
+			drawPoint(p);
+		}
 
 	endShape();
 
 	HolePortal4Pos.w.x=-2.6f;
 	HolePortal4Pos.w.y=0.0f;
+
+	HoleCollision4=beginShape();
+
+		setColour(0.0f,0.75f,0.0f);
+		drawLineLoop(HoleCollision4Points,5);
+
+	endShape();
+
+	HoleCollision4Pos.w.x=0.0f;
+	HoleCollision4Pos.w.y=0.0f;
 
 	//For the arrow to show the current Angle that the ball's direction will go in
 	GolfClubofSorts = beginShape();
@@ -345,9 +444,9 @@ void init()
 	//For the Golf Ball
 	GolfBall=beginShape();
 
-		for(float Angle = -PI; Angle <= PI; Angle += 0.05)
+		for(float Angle=-PI;Angle<=PI;Angle+=0.05)
 		{
-			Vec2 p(cos(Angle)/5, sin(Angle)/5);
+			Vec2 p(cos(Angle)/8,sin(Angle)/8);
 			setColour(1.0f,1.0f,1.0f);
 			drawPoint(p);
 		}
@@ -484,7 +583,7 @@ void update(float dt)
 
 	float AimSpeed=TWO_PI*dt;
 
-	if(CanMove==true)
+	if((CanMove==true)&&(Win==false))
 	{
 		//Rotate ship right
 		if(isKeyPressed('d')||(isKeyPressed('D')))
@@ -500,7 +599,7 @@ void update(float dt)
 	}
 	else
 	{
-		if((isKeyPressed(' ')==false)&&(SpaceKeyRelease==false))
+		if((isKeyPressed(' ')==false)&&(SpaceKeyRelease==false)&&(Win==false))
 		{
 			SpaceKeyRelease=true;
 			Strokes++;
@@ -508,30 +607,30 @@ void update(float dt)
 
 		/*if(BallPower>0)
 		{*/
-			if(SpaceKeyRelease==true)
+		if((SpaceKeyRelease==true)&&(Win==false))
+		{
+			GolfBallPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+			PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+			PowerBarInner1Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+			PowerBarInner2Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+			PowerBarInner3Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+			PowerBarInner4Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+			PowerBarInner5Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+			BallPower-=2*dt;
+		}
+		else
+		{
+			if((BallPower<=20)&&(Win==false))
 			{
-				GolfBallPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner1Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner2Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner3Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner4Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner5Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				BallPower-=2*dt;
+				BallPower=BallPower+0.2;
 			}
-			else
-			{
-				if(BallPower<=20)
-				{
-					BallPower=BallPower+0.2;
-				}
-			}
+		}
 
-			if(BallPower<=0)
-			{
-				CanMove=true;
-				GolfClubofSortsPos=GolfBallPos;
-			}
+		if((BallPower<=0)&&(Win==false))
+		{
+			CanMove=true;
+			GolfClubofSortsPos=GolfBallPos;
+		}
 		/*}*/
 
 		/*if(BallPower<0)
@@ -563,15 +662,16 @@ void update(float dt)
 		}*/
 	}
 
-	if((isKeyPressed(' ')==true)&&(CanMove==true))
+	if((isKeyPressed(' ')==true)&&(CanMove==true)&&(Win==false))
 	{
 		GolfBallPos=GolfClubofSortsPos;
 		BallPower=1;
 		CanMove=false;
 		SpaceKeyRelease=false;
+		Portal=false;
 	}
 
-	float Closest1=1.0f;
+	float Closest1=10000.0f;
 
 	Vec2 N1;
 
@@ -645,6 +745,7 @@ void update(float dt)
 		GolfBallPos.y-=2*dot(N1,GolfBallPos.y)*N1;
 		GolfBallPos.x.x=GolfBallPos.y.y;
 		GolfBallPos.x.y=-GolfBallPos.y.x;
+		BallPower=BallPower-0.2;
 	}
 
 	if(Closest2<(BallPower*dt))
@@ -652,6 +753,7 @@ void update(float dt)
 		GolfBallPos.y-=2*dot(N2,GolfBallPos.y)*N2;
 		GolfBallPos.x.x=GolfBallPos.y.y;
 		GolfBallPos.x.y=-GolfBallPos.y.x;
+		BallPower=BallPower-0.2;
 	}
 
 	if(Closest3<(BallPower*dt))
@@ -659,16 +761,15 @@ void update(float dt)
 		GolfBallPos.y-=2*dot(N3,GolfBallPos.y)*N3;
 		GolfBallPos.x.x=GolfBallPos.y.y;
 		GolfBallPos.x.y=-GolfBallPos.y.x;
+		BallPower=BallPower-0.2;
 	}
 
-	float Closest4=1.0f;
+	float Closest4=10000.0f;
 
-	Vec2 N4;
-
-	for(int i=1;;i++)
+	for(int i=1;i<sizeof(HoleWinCollisionPoints)/sizeof(Vec2);i++)
 	{
 		// These are the same two coordinates used to draw the line. 
-		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,HoleWin[i-1],HoleWin[i]);
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,HoleWinCollisionPoints[i-1],HoleWinCollisionPoints[i]);
 
 		// if intersection found (e.g. distance returned is not negative)
 		if(Isect>=0)
@@ -676,19 +777,180 @@ void update(float dt)
 			if(Isect<Closest4)
 			{
 				Closest4=Isect;
-				Vec2 AB(HoleWin[i-1]-HoleWin[i]);
-				AB=normalize(AB);
-				N4.x=-AB.y;
-				N4.y=AB.x;
 			}
 		}
 	}
 
 	if(Closest4<(BallPower*dt))
 	{
-		GolfBallPos.y-=2*dot(N4,GolfBallPos.y)*N4;
-		GolfBallPos.x.x=GolfBallPos.y.y;
-		GolfBallPos.x.y=-GolfBallPos.y.x;
+		BallPower=0;
+		GolfBallPos=HoleWinPos;
+		Win=true;
+		Score=Strokes-Par;
+	}
+
+	float Closest5=10000.0f;
+
+	for(int i=1;i<sizeof(HoleCollision1Points)/sizeof(Vec2);i++)
+	{
+		// These are the same two coordinates used to draw the line. 
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,HoleCollision1Points[i-1],HoleCollision1Points[i]);
+
+		// if intersection found (e.g. distance returned is not negative)
+		if(Isect>=0)
+		{
+			if(Isect<Closest5)
+			{
+				Closest5=Isect;
+			}
+		}
+	}
+
+	if((Closest5<(BallPower*dt))&&(Portal==false))
+	{
+		Portal=true;
+
+		srand(time(NULL));
+		PortalNum=((rand()%20));
+
+		switch(PortalNum)
+		{
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+			case 4: GolfBallPos=HolePortal1Pos;
+					break;
+			case 5:
+			case 6:
+			case 7:	
+			case 8:
+			case 9:	GolfBallPos=HolePortal2Pos;
+					break;
+			case 10:
+			case 11:
+			case 12:
+			case 13:
+			case 14:GolfBallPos=HolePortal3Pos;
+					break;
+			case 15:
+			case 16:
+			case 17:
+			case 18:
+			case 19:GolfBallPos=HolePortal4Pos;
+					break;
+		}
+	}
+
+	float Closest6=10000.0f;
+
+	for(int i=1;i<sizeof(HoleCollision2Points)/sizeof(Vec2);i++)
+	{
+		// These are the same two coordinates used to draw the line. 
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,HoleCollision2Points[i-1],HoleCollision2Points[i]);
+
+		// if intersection found (e.g. distance returned is not negative)
+		if(Isect>=0)
+		{
+			if(Isect<Closest6)
+			{
+				Closest6=Isect;
+			}
+		}
+	}
+
+	if((Closest6<(BallPower*dt))&&(Portal==false))
+	{
+		Portal=true;
+
+		srand(time(NULL));
+		PortalNum=((rand()%4));
+
+		switch(PortalNum)
+		{
+			case 0:	GolfBallPos=HolePortal1Pos;
+					break;
+			case 1:	GolfBallPos=HolePortal2Pos;
+					break;
+			case 2:	GolfBallPos=HolePortal3Pos;
+					break;
+			case 3:	GolfBallPos=HolePortal4Pos;
+					break;
+		}
+	}
+
+	float Closest7=10000.0f;
+
+	for(int i=1;i<sizeof(HoleCollision3Points)/sizeof(Vec2);i++)
+	{
+		// These are the same two coordinates used to draw the line. 
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,HoleCollision3Points[i-1],HoleCollision3Points[i]);
+
+		// if intersection found (e.g. distance returned is not negative)
+		if(Isect>=0)
+		{
+			if(Isect<Closest7)
+			{
+				Closest7=Isect;
+			}
+		}
+	}
+
+	if((Closest7<(BallPower*dt))&&(Portal==false))
+	{
+		Portal=true;
+
+		srand(time(NULL));
+		PortalNum=((rand()%4));
+
+		switch(PortalNum)
+		{
+			case 0:	GolfBallPos=HolePortal1Pos;
+					break;
+			case 1:	GolfBallPos=HolePortal2Pos;
+					break;
+			case 2:	GolfBallPos=HolePortal3Pos;
+					break;
+			case 3:	GolfBallPos=HolePortal4Pos;
+					break;
+		}
+	}
+
+	float Closest8=10000.0f;
+
+	for(int i=1;i<sizeof(HoleCollision4Points)/sizeof(Vec2);i++)
+	{
+		// These are the same two coordinates used to draw the line. 
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,HoleCollision4Points[i-1],HoleCollision4Points[i]);
+
+		// if intersection found (e.g. distance returned is not negative)
+		if(Isect>=0)
+		{
+			if(Isect<Closest8)
+			{
+				Closest8=Isect;
+			}
+		}
+	}
+
+	if((Closest8<(BallPower*dt))&&(Portal==false))
+	{
+		Portal=true;
+
+		srand(time(NULL));
+		PortalNum=((rand()%4));
+
+		switch(PortalNum)
+		{
+			case 0:	GolfBallPos=HolePortal1Pos;
+					break;
+			case 1:	GolfBallPos=HolePortal2Pos;
+					break;
+			case 2:	GolfBallPos=HolePortal3Pos;
+					break;
+			case 3:	GolfBallPos=HolePortal4Pos;
+					break;
+		}
 	}
 
 	////Loop through each line that makes up the wall
@@ -767,10 +1029,16 @@ void draw()
 	drawShape(GolfCourseExtra2Pos,GolfCourseExtra2);
 	drawShape(TreePos,Tree);
 	drawShape(HoleWinPos,HoleWin);
+	drawShape(HoleWinCollisionPos,HoleWinCollision);
 	drawShape(HolePortal1Pos,HolePortal1);
+	drawShape(HoleCollision1Pos,HoleCollision1);
 	drawShape(HolePortal2Pos,HolePortal2);
+	drawShape(HoleCollision2Pos,HoleCollision2);
 	drawShape(HolePortal3Pos,HolePortal3);
+	drawShape(HoleCollision3Pos,HoleCollision3);
 	drawShape(HolePortal4Pos,HolePortal4);
+	drawShape(HoleCollision4Pos,HoleCollision4);
+
 	if(CanMove==true)
 	{
 		drawShape(GolfClubofSortsPos,GolfClubofSorts);
@@ -787,28 +1055,29 @@ void draw()
 
 		if(BallPower>=5)
 		{
-		setColour(0.5f, 1.0f, 0.0f);
-		drawShape(PowerBarInner2Pos,PowerBarInner2);
+			setColour(0.5f, 1.0f, 0.0f);
+			drawShape(PowerBarInner2Pos,PowerBarInner2);
 		}
 
 		if(BallPower>=10)
 		{
-		setColour(1.0f, 1.0f, 0.0f);
-		drawShape(PowerBarInner3Pos,PowerBarInner3);
+			setColour(1.0f, 1.0f, 0.0f);
+			drawShape(PowerBarInner3Pos,PowerBarInner3);
 		}
 
 		if(BallPower>=15)
 		{
-		setColour(1.0f, 0.5f, 0.0f);
-		drawShape(PowerBarInner4Pos,PowerBarInner4);
+			setColour(1.0f, 0.5f, 0.0f);
+			drawShape(PowerBarInner4Pos,PowerBarInner4);
 		}
 
 		if(BallPower>=20)
 		{
-		setColour(1.0f, 0.0f, 0.0f);
-		drawShape(PowerBarInner5Pos,PowerBarInner5);
+			setColour(1.0f, 0.0f, 0.0f);
+			drawShape(PowerBarInner5Pos,PowerBarInner5);
 		}
 	}
+
 	drawShape(GolfBallPos,GolfBall);
 	drawText(-19.5f,15.2f,"Score: %i",Score);
 	drawText(-19.5f,14.7f,"Strokes: %i",Strokes);
@@ -816,6 +1085,58 @@ void draw()
 	drawText(14.4f,14.7f,"Press 'd' to turn clockwise");
 	drawText(9.5f,14.2f,"Press and hold the Space key to increase the power");
 	drawText(11.7f,13.7f,"Release the Space key to hit the golf ball");
+
+	if(Win==true)
+	{
+		setColour(0.0f,0.0f,0.0f);
+
+		if(Strokes==(Par-4))
+		{
+			drawText(-1.7f,0.5f,"@%#& Me!!!! You're ");
+			drawText(-1.7f,0.0f,"amazing! Go play a");
+			drawText(-1.3f,-0.5f,"harder game.");
+		}
+		else if(Strokes==(Par-3))
+		{
+			drawText(-1.1f,0.25f,"Albatross!!!.");
+			drawText(-1.0f,-0.25f,"Fantastic!.");
+		}
+		else if(Strokes==(Par-2))
+		{
+			drawText(-1.35f,0.25f,"Eagle!! You're ");
+			drawText(-1.7f,-0.25f,"damn Good at this.");
+		}
+		else if(Strokes==(Par-1))
+		{
+			drawText(-1.8f,0.0f,"Birdie! Pretty good.");
+		}
+		else if(Strokes==(Par))
+		{
+			drawText(-1.2f,0.0f,"Par. Not bad.");
+		}
+		else if(Strokes==(Par+1))
+		{
+			drawText(-0.55f,0.5f,"Bogie.");
+			drawText(-1.6f,0.0f,"Going to need to ");
+			drawText(-1.8f,-0.5f,"step it up next time.");
+		}
+		else if(Strokes==(Par+2))
+		{
+			drawText(-1.4f,0.25f,"Double-Bogie.");
+			drawText(-1.7f,-0.25f,"Not good enough.");
+		}
+		else if(Strokes==(Par+3))
+		{
+			drawText(-1.2f,0.25f,"Triple-Bogie.");
+			drawText(-1.3f,-0.25f,"Wow! Terrible!");
+		}
+		else if(Strokes>=(Par+4))
+		{
+			drawText(-1.5f,0.5f,"You're not very");
+			drawText(-1.8f,0.0f,"good at is, are you?");
+			drawText(-1.2f,-0.5f,"Just give up");
+		}
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
