@@ -18,7 +18,7 @@ Score=0,Strokes=0,Par=5,HolePortal1,HolePortal2,HolePortal3,HolePortal4,PowerBar
 PowerBarInner1,PowerBarInner2,PowerBarInner3,PowerBarInner4,PowerBarInner5,HoleWinCollision,
 HoleCollision1,HoleCollision2,HoleCollision3,HoleCollision4,PortalNum=0;
 
-float FindIntersect(Vec2 P,Vec2 D,Vec2 A,Vec2 B)
+float FindIntersect(Vec2 P,Vec2 D,Vec2 A,Vec2 B)										//Find intersect function is entered every time to check if there has been an intersection between the ball and the line between two points for any particulatar vector.
 {
 	//Converts into a vector quantity
  	Vec2 BA=B-A;
@@ -56,26 +56,7 @@ float FindIntersect(Vec2 P,Vec2 D,Vec2 A,Vec2 B)
 	}
  }
 
-//Matrix2 InverseMatrix(Matrix2 InverseMatrixMatrix)
-//{
-//	float AD=InverseMatrixMatrix.x.x*InverseMatrixMatrix.y.y;
-//	float BC=InverseMatrixMatrix.x.y*InverseMatrixMatrix.y.x;
-//
-//	Matrix2 Temp;
-//
-//	Temp.x.x=InverseMatrixMatrix.x.x;
-//	Temp.x.y=-InverseMatrixMatrix.x.y;
-//	Temp.y.x=-InverseMatrixMatrix.y.x;
-//	Temp.y.y=InverseMatrixMatrix.y.y;
-//		
-//	Temp.w=InverseMatrixMatrix.w;
-//	Temp.w=((1/(AD-BC))*(Temp.w));
-//	/*Temp.y*=(1/(AD-BC));*/
-//
-//	return Temp;
-//}
-
-Vec2 GolfCoursePoints[]=
+Vec2 GolfCoursePoints[]=				//points for the main part of the gold course
 {
 	Vec2 (-2.0f,-1.0f),
 	Vec2 (-2.0f,1.0f),
@@ -148,7 +129,7 @@ Vec2 GolfCoursePoints[]=
 	Vec2 (-2.0f,-1.0f),		//69=Fin
 };
 
-Vec2 GolfCourseExtra1Points[]=
+Vec2 GolfCourseExtra1Points[]=			//points for another part for the golf course
 {
 	Vec2 (-2.0f,7.0f),
 	Vec2 (0.0f,8.0f),
@@ -159,7 +140,7 @@ Vec2 GolfCourseExtra1Points[]=
 	Vec2 (-2.0f,7.0f),		//7=Fin
 };
 
-Vec2 GolfCourseExtra2Points[]=
+Vec2 GolfCourseExtra2Points[]=			//points for the final part fo the golf course
 {
 	Vec2 (5.0f,5.0f),
 	Vec2 (7.0f,5.0f),
@@ -168,7 +149,7 @@ Vec2 GolfCourseExtra2Points[]=
 	Vec2 (5.0f,5.0f),	//5 and 5=Fin
 };
 
-Vec2 HoleWinCollisionPoints[]=
+Vec2 HoleWinCollisionPoints[]=				//points for the hidden square that acts are the hole's collision
 {
 	Vec2 (-3.2f,-11.2f),
 	Vec2 (-2.8f,-11.2f),
@@ -177,7 +158,7 @@ Vec2 HoleWinCollisionPoints[]=
 	Vec2 (-3.2f,-11.2f),	//5 and 5=Fin
 };
 
-Vec2 HoleCollision1Points[]=
+Vec2 HoleCollision1Points[]=				//points for more hole collision
 {
 	Vec2 (0.2f,1.75f),
 	Vec2 (-0.2f,1.75f),
@@ -186,7 +167,7 @@ Vec2 HoleCollision1Points[]=
 	Vec2 (0.2f,1.75f),	//5 and 5=Fin
 };
 
-Vec2 HoleCollision2Points[]=
+Vec2 HoleCollision2Points[]=				//points for more hole collision
 {
 	Vec2 (2.8f,0.2f),
 	Vec2 (2.4f,0.2f),
@@ -195,7 +176,7 @@ Vec2 HoleCollision2Points[]=
 	Vec2 (2.8f,0.2f),	//5 and 5=Fin
 };
 
-Vec2 HoleCollision3Points[]=
+Vec2 HoleCollision3Points[]=				//points for more hole collision
 {
 	Vec2 (0.2f,-1.75f),
 	Vec2 (-0.2f,-1.75f),
@@ -204,7 +185,7 @@ Vec2 HoleCollision3Points[]=
 	Vec2 (0.2f,-1.75f),	//5 and 5=Fin
 };
 
-Vec2 HoleCollision4Points[]=
+Vec2 HoleCollision4Points[]=				//points for more hole collision
 {
 	Vec2 (-2.8f,0.2f),
 	Vec2 (-2.4f,0.2f),
@@ -578,19 +559,19 @@ void update(float dt)
 {
 	g_time+=dt;
 
-	float ca=cos(GolfClubAim);
+	float ca=cos(GolfClubAim);						//creates and initialises ca and sa, which give the golf club's aim a value using sine and cosine and allows the aim to rotate around
 	float sa=sin(GolfClubAim);
 	GolfClubofSortsPos.x.x=ca;
 	GolfClubofSortsPos.x.y=sa;
 	GolfClubofSortsPos.y.x=-sa;
 	GolfClubofSortsPos.y.y=ca;
 
-	float AimSpeed=TWO_PI*dt;
+	float AimSpeed=TWO_PI*dt;		//gives aimspeed the value of two PI times dt, which is amount of time between frames (i think)
 
-	if((CanMove==true)&&(Win==false)&&(Help==false))
+	if((CanMove==true)&&(Win==false)&&(Help==false))			//if statement entered is the user hasn't won, isn't in the help menu, the ball isn't currently moving and the user isn't holding the space key at the moment.
 	{
 		//Rotate ship right
-		if(isKeyPressed('d')||(isKeyPressed('D')))
+		if(isKeyPressed('d')||(isKeyPressed('D')))				//if the user presses and holds d'' they will trun anti-clockwise. press and hold a'' the user will turn clockwise.
 		{
 			GolfClubAim-=(AimSpeed/3.5);
 		}
@@ -601,88 +582,58 @@ void update(float dt)
 			GolfClubAim+=(AimSpeed/3.5);
 		}
 	}
-	else
+	else						//if canmove is false then it'll enter the else section. within this part, the movement is done. once the user has released the space key, it sets the space key bool to true so they cannot keep spamming space to ruin the next few if statements
 	{
-		if((isKeyPressed(' ')==false)&&(SpaceKeyRelease==false)&&(Win==false)&&(Help==false))
+		if((isKeyPressed(' ')==false)&&(SpaceKeyRelease==false)&&(Win==false)&&(Help==false))		
 		{
 			SpaceKeyRelease=true;
 			Portal=false;
 			Strokes++;
 		}
 
-		/*if(BallPower>0)
-		{*/
-		if((SpaceKeyRelease==true)&&(Win==false)&&(Help==false))
+		if((SpaceKeyRelease==true)&&(Win==false)&&(Help==false))			//once the user has let go of space and the SpaceKeyRelease has been set to true (meaning that they have let go of space and the bool has been changed in the if statement above)
 		{
-			GolfBallPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-			PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
+			GolfBallPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);			//sets movement for the golf ball
+			PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);		//moves the hidden (will be unhidden when the ball has stopped and the user is holding space) power bar boxes in the same way as the ball
 			PowerBarInner1Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
 			PowerBarInner2Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
 			PowerBarInner3Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
 			PowerBarInner4Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
 			PowerBarInner5Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-			BallPower-=2*dt;
+			BallPower-=2*dt;													//using dt ballpower will slowdown based on the maount time it has been moving.
 		}
 		else
 		{
-			if((BallPower<=20)&&(Win==false)&&(Help==false))
+			if((BallPower<=20)&&(Win==false)&&(Help==false))					//if the user hasn't let go of space, then the ballpower will increase up until it hits, when the ball power is at its maximun.
 			{
 				BallPower=BallPower+0.2;
 			}
 		}
 
-		if((BallPower<=0)&&(Win==false)&&(Help==false))
+		if((BallPower<=0)&&(Win==false)&&(Help==false))							//after the user has let go of space and the ball has moved to where it was aimed at in the amount that the ball power was set to and ball has slowed down to the point that the power has hit 0, this if statement will be entered
 		{
-			CanMove=true;
-			GolfClubofSortsPos=GolfBallPos;
+			CanMove=true;														//can move is set back to true, meaning that the user can start to aim again and the is space key pressed if statement below
+			GolfClubofSortsPos=GolfBallPos;										//the direction arrow is set to the position of the ball so the user can it to help them aim
 		}
-		/*}*/
-
-		/*if(BallPower<0)
-		{
-			if(SpaceKeyRelease==true)
-			{
-				GolfBallPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarOuterPos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner1Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner2Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner3Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner4Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				PowerBarInner5Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
-				BallPower+=2*dt;
-			}
-			else
-			{
-				if(BallPower>=-20)
-				{
-					BallPower=BallPower-0.2;
-				}
-			}
-
-			if(BallPower>=0)
-			{
-				CanMove=true;
-				GolfClubofSortsPos=GolfBallPos;
-			}
-		}*/
+		
 	}
 
-	if((isKeyPressed(' ')==true)&&(CanMove==true)&&(Win==false)&&(Help==false))
+	if((isKeyPressed(' ')==true)&&(CanMove==true)&&(Win==false)&&(Help==false))			//enters the if statement if the user has pressed space, isn't in the help menu and hasn't already won the game.
 	{
-		GolfBallPos=GolfClubofSortsPos;
-		BallPower=1;
-		CanMove=false;
-		SpaceKeyRelease=false;
+		GolfBallPos=GolfClubofSortsPos;				//the gold ball is set to the position of the direction arrow
+		BallPower=1;								//ballpower is set to 1
+		CanMove=false;								//canmove is set to false so that the gold ball can move and the user cannot alter the direction anymore, until the ball has finished moving
+		SpaceKeyRelease=false;						//spacekeyrelease is set to false, so that the user has to release the space key again at some point in order to make the ball ove and slow down properly in the above if statements
 	}
 
-	float Closest1=10000.0f;
+	float Closest1=10000.0f;				//creates a new float, which is used for the next loop
 
-	Vec2 N1;
-
-	for(int i=1;i<sizeof(GolfCoursePoints)/sizeof(Vec2);i++)
+	Vec2 N1;								//creates a new vec that will also be used in the next loop, which will be for intersection for collision
+	
+	for(int i=1;i<sizeof(GolfCoursePoints)/sizeof(Vec2);i++)		//for loop start with i=1 and ends when 'i' gets to the same number as the amount of points in golfcoursepoints
 	{
 		// These are the same two coordinates used to draw the line. 
-		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCoursePoints[i-1],GolfCoursePoints[i]);
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCoursePoints[i-1],GolfCoursePoints[i]);		//enters find intersect, with the position of the golf ball, the y-position of the golf ball (which is the golf ball's ball direction), a point from the goldcoursepoints and the previous point from golfcoursepoints.
 
 		// if intersection found (e.g. distance returned is not negative)
 		if(Isect>=0)
@@ -690,10 +641,10 @@ void update(float dt)
 			if(Isect<Closest1)
 			{
 				Closest1=Isect;
-				Vec2 AB(GolfCoursePoints[i-1]-GolfCoursePoints[i]);
-				AB=normalize(AB);
-				N1.x=-AB.y;
-				N1.y=AB.x;
+				Vec2 AB(GolfCoursePoints[i-1]-GolfCoursePoints[i]);		//creates vec with two consecutive points from golfcoursepoints
+				AB=normalize(AB);			//normalises the recently created vec
+				N1.x=-AB.y;					//sets the x coordinate of a vec to the -ve value of the y-coordinate of the recently created and normalised vec
+				N1.y=AB.x;					//sets the y coordinate of a vec to the  +ve value of the x-coordinate of the recently created and normalised vec
 			}
 		}
 	}
@@ -705,7 +656,7 @@ void update(float dt)
 	for(int i=1;i<sizeof(GolfCourseExtra1Points)/sizeof(Vec2);i++)
 	{
 		// These are the same two coordinates used to draw the line. 
-		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra1Points[i-1],GolfCourseExtra1Points[i]);
+		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra1Points[i-1],GolfCourseExtra1Points[i]);			//the same equations as above but with the other points needed to fully create everything for the golf course
 
 		// if intersection found (e.g. distance returned is not negative)
 		if(Isect>=0)
@@ -725,7 +676,7 @@ void update(float dt)
 
 	Vec2 N3;
 
-	for(int i=1;i<sizeof(GolfCourseExtra2Points)/sizeof(Vec2);i++)
+	for(int i=1;i<sizeof(GolfCourseExtra2Points)/sizeof(Vec2);i++)			//likewise as the few equations above, but with different points, which are needed to fully create everything for the golfcourse.
 	{
 		// These are the same two coordinates used to draw the line. 
 		float Isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra2Points[i-1],GolfCourseExtra2Points[i]);
@@ -744,12 +695,12 @@ void update(float dt)
 		}
 	}
 
-	if(Closest1<(BallPower*dt))
+	if(Closest1<(BallPower*dt))							//if closest, which is either a large value (if there isn't an interaction) or the value of isect from the find intersection function.
 	{
-		GolfBallPos.y-=2*dot(N1,GolfBallPos.y)*N1;
-		GolfBallPos.x.x=GolfBallPos.y.y;
-		GolfBallPos.x.y=-GolfBallPos.y.x;
-		BallPower=BallPower-0.2;
+		GolfBallPos.y-=2*dot(N1,GolfBallPos.y)*N1;		//changes various coordinates and directions in order to make the ball look as if it has hit the wall and bounced of it.
+		GolfBallPos.x.x=GolfBallPos.y.y;				//^^^
+		GolfBallPos.x.y=-GolfBallPos.y.x;				//^^^
+		BallPower=BallPower-0.2;						//ballpower is made smaller to make it see like hitting the ball slowed it down
 		Portal=false;
 	}
 
@@ -783,17 +734,17 @@ void update(float dt)
 		{
 			if(Isect<Closest4)
 			{
-				Closest4=Isect;
+				Closest4=Isect;						//set the value of isect to the value of closest if the if statement is entered and the if statement is only entered is find interest returns a value that is more 0 and it only does this if there is an interesection
 			}
 		}
 	}
 
 	if(Closest4<(BallPower*dt))
 	{
-		BallPower=0;
-		GolfBallPos=HoleWinPos;
-		Win=true;
-		Score=Strokes-Par;
+		BallPower=0;					//this if statement is entered if there is a intersection for the ball and the final ball
+		GolfBallPos=HoleWinPos;			//sets the postion of the ball to the position of the final hole
+		Win=true;						//the intersection means the user has won and won is thus set to true
+		Score=Strokes-Par;				//the score is then set. The user's score is the amount of strokes they needed to put the ball minus par.
 	}
 
 	float Closest5=10000.0f;
@@ -815,12 +766,12 @@ void update(float dt)
 
 	if((Closest5<(BallPower*dt))&&(Portal==false))
 	{
-		Portal=true;
+		Portal=true;											//sets Portal to true
 
 		srand(time(NULL));
 		PortalNum=((rand()%20));
 
-		switch(PortalNum)
+		switch(PortalNum)										//switchs statement for PortalNum after it has been given a random number between 0 and 20 by using srand. the switch statement then selects a case based on the number and assigns the position of one of the portals to the golfball based on what case is chosen.
 		{
 			case 0:
 			case 1:
@@ -871,17 +822,33 @@ void update(float dt)
 		Portal=true;
 
 		srand(time(NULL));
-		PortalNum=((rand()%4));
+		PortalNum=((rand()%20));
 
 		switch(PortalNum)
 		{
-			case 0:	GolfBallPos=HolePortal1Pos;
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+			case 4: GolfBallPos=HolePortal1Pos;
 					break;
-			case 1:	GolfBallPos=HolePortal2Pos;
+			case 5:
+			case 6:
+			case 7:	
+			case 8:
+			case 9:	GolfBallPos=HolePortal2Pos;
 					break;
-			case 2:	GolfBallPos=HolePortal3Pos;
+			case 10:
+			case 11:
+			case 12:
+			case 13:
+			case 14:GolfBallPos=HolePortal3Pos;
 					break;
-			case 3:	GolfBallPos=HolePortal4Pos;
+			case 15:
+			case 16:
+			case 17:
+			case 18:
+			case 19:GolfBallPos=HolePortal4Pos;
 					break;
 		}
 	}
@@ -908,17 +875,33 @@ void update(float dt)
 		Portal=true;
 
 		srand(time(NULL));
-		PortalNum=((rand()%4));
+		PortalNum=((rand()%20));
 
 		switch(PortalNum)
 		{
-			case 0:	GolfBallPos=HolePortal1Pos;
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+			case 4: GolfBallPos=HolePortal1Pos;
 					break;
-			case 1:	GolfBallPos=HolePortal2Pos;
+			case 5:
+			case 6:
+			case 7:	
+			case 8:
+			case 9:	GolfBallPos=HolePortal2Pos;
 					break;
-			case 2:	GolfBallPos=HolePortal3Pos;
+			case 10:
+			case 11:
+			case 12:
+			case 13:
+			case 14:GolfBallPos=HolePortal3Pos;
 					break;
-			case 3:	GolfBallPos=HolePortal4Pos;
+			case 15:
+			case 16:
+			case 17:
+			case 18:
+			case 19:GolfBallPos=HolePortal4Pos;
 					break;
 		}
 	}
@@ -945,72 +928,38 @@ void update(float dt)
 		Portal=true;
 
 		srand(time(NULL));
-		PortalNum=((rand()%4));
+		PortalNum=((rand()%20));
 
 		switch(PortalNum)
 		{
-			case 0:	GolfBallPos=HolePortal1Pos;
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+			case 4: GolfBallPos=HolePortal1Pos;
 					break;
-			case 1:	GolfBallPos=HolePortal2Pos;
+			case 5:
+			case 6:
+			case 7:	
+			case 8:
+			case 9:	GolfBallPos=HolePortal2Pos;
 					break;
-			case 2:	GolfBallPos=HolePortal3Pos;
+			case 10:
+			case 11:
+			case 12:
+			case 13:
+			case 14:GolfBallPos=HolePortal3Pos;
 					break;
-			case 3:	GolfBallPos=HolePortal4Pos;
+			case 15:
+			case 16:
+			case 17:
+			case 18:
+			case 19:GolfBallPos=HolePortal4Pos;
 					break;
 		}
 	}
 
-	////Loop through each line that makes up the wall
-	//for(int i=1;i<sizeof(GolfCoursePoints)/sizeof(Vec2);i++)
-	//{
-	//	float isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCoursePoints[i-1],GolfCoursePoints[i]);
-	//	
-	//	//If intersection found (e.g. distance returned is not negative)
-	//	if(isect>=0)
-	//	{
-	//		//We only care about the closest intersection
-	//		if(isect<=0.2f)
-	//		{
-	//			GolfBallPos=InverseMatrix(GolfBallPos);
-	//			/*BallPower*=-BallPower;*/
-	//		}
-	//	}
-	//}
-
-	//for(int i=1;i<sizeof(GolfCourseExtra1Points)/sizeof(Vec2);i++)
-	//{
-	//	float isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra1Points[i-1],GolfCourseExtra1Points[i]);
-	//	
-	//	//If intersection found (e.g. distance returned is not negative)
-	//	if(isect>=0)
-	//	{
-	//		//We only care about the closest intersection
-	//		if(isect<=0.2f)
-	//		{
-	//			GolfBallPos=InverseMatrix(GolfBallPos);
-	//			/*BallPower*=-BallPower;*/
-	//		}
-	//	}
-	//}
-
-	//for(int i=1;i<sizeof(GolfCourseExtra2Points)/sizeof(Vec2);i++)
-	//{
-	//	float isect=FindIntersect(GolfBallPos.w,GolfBallPos.y,GolfCourseExtra2Points[i-1],GolfCourseExtra2Points[i]);
-	//	
-	//	//If intersection found (e.g. distance returned is not negative)
-
-	//	if(isect>=0)
-	//	{
-	//		//We only care about the closest intersection
-	//		if(isect<=0.2f)
-	//		{
-	//			GolfBallPos=InverseMatrix(GolfBallPos);
-	//			/*BallPower*=-BallPower;*/
-	//		}
-	//	}
-	//}
-
-	if((isKeyPressed('r'))||(isKeyPressed('R')))
+	if((isKeyPressed('r'))||(isKeyPressed('R')))								//enters  if statement the user has pressed 'r'. if the user has pressed 'r' several variables are reset back to their original value and several vecs are set back to original position to make it seem as if the game has started again
 	{
 		Win=false;
 		CanMove=true;
@@ -1033,17 +982,17 @@ void update(float dt)
 		PowerBarInner5Pos.w=GolfBallPos.w+GolfBallPos.y*(BallPower*dt);
 	}
 
-	if(isKeyPressed(kKeyF1)==true)
+	if(isKeyPressed(kKeyF1)==true)							//if the user has pressed F1 Help is set true, which allows the user to enter the if statement for the Help menu, which draws all the text for the help menu and stops the porgram drawing the course and balla nd everything else while in the hlp menu.
 	{
 		Help=true;
 	}
 
-	if((Help==true)&&(isKeyPressed(kKeyBackSpace)))
+	if((Help==true)&&(isKeyPressed(kKeyBackSpace)))		//if the user is in the help menu and they press the backspace key, help is set to false, which allows them to exit the ehlp menu and then the program will draw abck everything that was there before they entered the help menu, which makes it look as if the help menu was just open on top of the game.
 	{
 		Help=false;
 	}
 	
-	if(isKeyPressed(kKeyEscape)==true)
+	if(isKeyPressed(kKeyEscape)==true)					//if the user presses the espace key (Esc) the it will enter this if statement, which will go in the exit functiona the game.
 	{
 		exit(0);
 	}
@@ -1064,35 +1013,34 @@ void draw()
 {
 	glLineWidth(4.0);
 
-	if(Help==false)
+	if(Help==false)		//Things within this if statement will only show when the help menu is not open.
 	{
-		drawShape(GolfCoursePos,GolfCourse);
-		drawShape(GolfCourseExtra1Pos,GolfCourseExtra1);
-		drawShape(GolfCourseExtra2Pos,GolfCourseExtra2);
-		drawShape(TreePos,Tree);
-		drawShape(HoleWinPos,HoleWin);
-		drawShape(HoleWinCollisionPos,HoleWinCollision);drawShape(HolePortal1Pos,HolePortal1);
-		drawShape(HoleCollision1Pos,HoleCollision1);
-		drawShape(HolePortal2Pos,HolePortal2);
-		drawShape(HoleCollision2Pos,HoleCollision2);
-		drawShape(HolePortal3Pos,HolePortal3);
-		drawShape(HoleCollision3Pos,HoleCollision3);
-		drawShape(HolePortal4Pos,HolePortal4);
-		drawShape(HoleCollision4Pos,HoleCollision4);
+		drawShape(GolfCoursePos,GolfCourse);			//draws most of the golf course
+		drawShape(GolfCourseExtra1Pos,GolfCourseExtra1); //draws anopther part of the golf course
+		drawShape(GolfCourseExtra2Pos,GolfCourseExtra2);	//and draws the last part of the gold course
+		drawShape(HoleWinPos,HoleWin);		//draws the final hole
+		drawShape(HoleWinCollisionPos,HoleWinCollision);drawShape(HolePortal1Pos,HolePortal1); //draw the hidden collision for final hole
+		drawShape(HoleCollision1Pos,HoleCollision1);		//draws the...
+		drawShape(HolePortal2Pos,HolePortal2);				//portal holes...
+		drawShape(HoleCollision2Pos,HoleCollision2);		//and the ...
+		drawShape(HolePortal3Pos,HolePortal3);				//collision needed ...
+		drawShape(HoleCollision3Pos,HoleCollision3);		//for them to...
+		drawShape(HolePortal4Pos,HolePortal4);				//work and...
+		drawShape(HoleCollision4Pos,HoleCollision4);		//collide properly...
 
 		setColour(1.0f,1.0f,1.0f);
-		drawText(16.6,15.2,"Hit F1 for help.");
+		drawText(16.6,15.2,"Hit F1 for help.");				//draws text, telling user how to access the help menu, in the white.
 	}
 
-	if((CanMove==true)&&(Help==false))
+	if((CanMove==true)&&(Help==false))					//if the ball is still, the user isn't holding the space key and the user isn't in the help menu then the direction arrow will be drawn and shown on screen in the same place as the ball
 	{
 		glLineWidth(2.0);
 		setColour(0.0f, 1.0f, 0.0f);
 		drawShape(GolfClubofSortsPos,GolfClubofSorts);
 	}
 
-	if((isKeyPressed(' ')==true)&&(SpaceKeyRelease==false)&&(Help==false))
-	{
+	if((isKeyPressed(' ')==true)&&(SpaceKeyRelease==false)&&(Help==false))		//if the user is holding space and isn't in the help menu, then the power bar will be drawn and shown.
+	{																			//a square of a different colour, ranging from green to red, is drawn depending on how long the user has held space
 		glLineWidth(2.0);
 		drawShape(PowerBarOuterPos,PowerBarOuter);
 
@@ -1127,7 +1075,7 @@ void draw()
 		}
 	}
 
-	if(Help==false)
+	if(Help==false)													//draws the ball on screen and the score, strokes and par in the top corner if the user isn't in the help menu.
 	{
 		drawShape(GolfBallPos,GolfBall);
 		drawText(-19.5f,15.2f,"Score: %i",Score);
@@ -1135,7 +1083,7 @@ void draw()
 		drawText(-19.5f,14.2f,"Par=%i",Par);
 	}
 	
-	if(Help==true)
+	if(Help==true)																										//if the user has pressed F1 to enter the help menu and hasn't pressed the BackSpace key yet then the help menu will be the only thing shown on screen. the help mneu has help for controls, instructions and the scoring system.
 	{
 		setColour(1.0f, 1.0f, 1.0f);
 		drawText(-7.5f,13.6f,"CONTROLS");
@@ -1175,7 +1123,7 @@ void draw()
 		drawText(-8.0f,-13.5f,"	  for this but it means that you're terrible. Your score will be your strokes minus par.");
 	}
 
-	if((Win==true)&&(Help==false))
+	if((Win==true)&&(Help==false))											//if the user has won and they are not in the help menu, text will appear on screen. If they putted in 3 then it'd say they got an eagle,, for example.
 	{
 		setColour(0.0f,0.0f,0.0f);
 
