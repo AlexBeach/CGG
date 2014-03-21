@@ -1,0 +1,3 @@
+CGG
+===
+OpenGL Programming Assignment
