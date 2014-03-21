@@ -1,0 +1,119 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{A05A2F59-30AF-489E-D394-270D55B9817D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{F041FFB9-5D41-4D7A-5CBA-08A8B839B0DE}"
+EndProject
+Project("{460b6e25-fdc0-4a38-a553-e18c8ef5ca93}") = "CGG_Week8", "CGG_Week8\CGG_Week8.2012.vcxproj", "{406b2bf5-2c32-4cab-ba3d-d41a965689e7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{8d39dfcb-c511-46eb-9578-29c081833de0}") = "Ex00_empty_window", "Ex00_empty_window\Ex00_empty_window.2012.vcxproj", "{67b5b47d-bd12-425b-ba92-2eff54262b97}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{eb4f30d2-6ef8-4e0c-a5f7-6fcdfb7cdf9a}") = "Ex01_mouse_input", "Ex01_mouse_input\Ex01_mouse_input.2012.vcxproj", "{a3fdd4cd-b00c-482a-bcfb-1416e315361c}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{cc5c034c-999c-4a67-b4ab-9fa2e62d9088}") = "Ex02_keyboard_input", "Ex02_keyboard_input\Ex02_keyboard_input.2012.vcxproj", "{6814189c-d74c-412f-8fa4-c6720cd3305d}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{adb16d30-86de-4bc1-931c-70dd39539809}") = "Ex03_drawing2D", "Ex03_drawing2D\Ex03_drawing2D.2012.vcxproj", "{6114edc8-4ae6-4543-a1fa-f7b82d7ca9d7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{322c8c2f-9f13-419e-92ad-ac32386375ad}") = "Ex04_drawing3D", "Ex04_drawing3D\Ex04_drawing3D.2012.vcxproj", "{f95ec245-5135-473b-8c5d-57c23a725ae2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{7268325f-5bf5-4647-b1cf-452d5f12155b}") = "Ex05_draw_primitives", "Ex05_draw_primitives\Ex05_draw_primitives.2012.vcxproj", "{eb9bd054-47e5-4497-9d84-ef9bd8a2a77d}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{13af2a99-aaef-40f6-b8b2-f5b8fd84fe86}") = "Ex06_lighting", "Ex06_lighting\Ex06_lighting.2012.vcxproj", "{6f9e5253-fe49-481f-bc5e-a525379686c2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{8c6d7505-8e17-4790-a2c7-0aed1c02c438}") = "Ex07_matrix_stack", "Ex07_matrix_stack\Ex07_matrix_stack.2012.vcxproj", "{b88535c9-e37f-4ee9-8bf8-36c0faa1f46c}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{e55c2ea7-ed62-4b2f-9161-f6c28640bf8f}") = "Ex08_drawing_text", "Ex08_drawing_text\Ex08_drawing_text.2012.vcxproj", "{b374238a-3680-468c-8f59-2800909d8229}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{b0d18683-c810-4783-9765-a6da534cb323}") = "Ex09_test_maths", "Ex09_test_maths\Ex09_test_maths.2012.vcxproj", "{2fba4261-0208-436b-9c51-8746da102fd2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{f48a11ee-5455-49fe-9289-b0186ee5813b}") = "Ex10_multiple_screens", "Ex10_multiple_screens\Ex10_multiple_screens.2012.vcxproj", "{f69834dd-b33b-4248-8c0f-13f7b241edfe}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{754c8874-a0c2-44b6-b1fe-2b80c11ca702}") = "Ex11_draw_indexed_primatives", "Ex11_draw_indexed_primatives\Ex11_draw_indexed_primatives.2012.vcxproj", "{d68c6fec-2843-4117-a2c5-06829c00709d}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{fd58784c-e7aa-451d-ae78-5b4e42492dcb}") = "Ex12_fullscreen", "Ex12_fullscreen\Ex12_fullscreen.2012.vcxproj", "{7be8df01-dec2-4b30-a81b-fc607c8f7a32}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{3a2e760c-0069-4249-81ba-c1fe4f565a85}") = "Ex13_custom_maya_camera", "Ex13_custom_maya_camera\Ex13_custom_maya_camera.2012.vcxproj", "{3952264d-bb2a-4962-a3cd-03eb21aa3594}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Project("{93241b0f-a13a-4142-bfa1-1674117da671}") = "libCGG", "libCGG\libCGG.2012.vcxproj", "{56e38656-47e1-43c4-92de-c2d538d39573}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{71873678-ca82-4000-8c63-4d2fd0997d87}") = "i7257741", "i7257741\i7257741.2012.vcxproj", "{fcb4dbf2-760b-4bad-8d02-ad53e46570eb}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {56e38656-47e1-43c4-92de-c2d538d39573}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{406b2bf5-2c32-4cab-ba3d-d41a965689e7} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{67b5b47d-bd12-425b-ba92-2eff54262b97} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{a3fdd4cd-b00c-482a-bcfb-1416e315361c} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{6814189c-d74c-412f-8fa4-c6720cd3305d} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{6114edc8-4ae6-4543-a1fa-f7b82d7ca9d7} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{f95ec245-5135-473b-8c5d-57c23a725ae2} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{eb9bd054-47e5-4497-9d84-ef9bd8a2a77d} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{6f9e5253-fe49-481f-bc5e-a525379686c2} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{b88535c9-e37f-4ee9-8bf8-36c0faa1f46c} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{b374238a-3680-468c-8f59-2800909d8229} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{2fba4261-0208-436b-9c51-8746da102fd2} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{f69834dd-b33b-4248-8c0f-13f7b241edfe} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{d68c6fec-2843-4117-a2c5-06829c00709d} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{7be8df01-dec2-4b30-a81b-fc607c8f7a32} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{3952264d-bb2a-4962-a3cd-03eb21aa3594} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+		{56e38656-47e1-43c4-92de-c2d538d39573} = {F041FFB9-5D41-4D7A-5CBA-08A8B839B0DE}
+		{fcb4dbf2-760b-4bad-8d02-ad53e46570eb} = {A05A2F59-30AF-489E-D394-270D55B9817D}
+	EndGlobalSection
+EndGlobal

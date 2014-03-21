@@ -242,47 +242,6 @@ void init()
 	GolfCourseExtra2Pos.w.x=0.0f;
 	GolfCourseExtra2Pos.w.y=0.0f;
 
-	//Tree=beginShape();
-
-	//Vec2 TreePosPoints[] = 
-	//{
-	//	Vec2 (0.0f,1.4f),
-	//	Vec2 (0.4f,1.76f),
-	//	Vec2 (1.0f,1.6f),
-	//	Vec2 (1.2f,1.2f),
-	//	Vec2 (1.2f,0.8f),		//5
-	//	Vec2 (1.6f,0.6f),
-	//	Vec2 (1.9f,0.3f),
-	//	Vec2 (2.0f,-0.1f),
-	//	Vec2 (1.8f,-0.4f),
-	//	Vec2 (1.4f,-0.7f),		//10
-	//	Vec2 (1.4f,-1.2f),
-	//	Vec2 (1.2f,-1.6f),
-	//	Vec2 (0.7f,-1.8f),
-	//	Vec2 (0.1f,-1.5f),
-	//	Vec2 (-0.4f,-1.7f),		//15
-	//	Vec2 (-1.0f,-1.5f),
-	//	Vec2 (-1.2f,-1.2f),
-	//	Vec2 (-1.18f,-0.8f),
-	//	Vec2 (-1.6f,-0.8f),
-	//	Vec2 (-1.84f,-0.4f),	//20
-	//	Vec2 (-2.0f,0.0f),
-	//	Vec2 (-1.8f,0.4f),
-	//	Vec2 (-1.4f,0.6f),
-	//	Vec2 (-1.46f,1.0f),
-	//	Vec2 (-1.3f,1.48f),		//25
-	//	Vec2 (-0.82f,1.76f),
-	//	Vec2 (-0.36f,1.64f),
-	//	Vec2 (0.0f,1.4f),		//28=Fin
-	//};
-
-	//setColour(0.0f,1.0f,0.0f);
-	//drawLineLoop(TreePosPoints,28);
-
-	//endShape();
-
-	//TreePos.w=(9.0f,9.0f);
-
 	HoleWin=beginShape();
 
 		for(float Angle=-PI;Angle<=PI;Angle+=0.05)
@@ -1015,10 +974,10 @@ void draw()
 
 	if(Help==false)		//Things within this if statement will only show when the help menu is not open.
 	{
-		drawShape(GolfCoursePos,GolfCourse);			//draws most of the golf course
-		drawShape(GolfCourseExtra1Pos,GolfCourseExtra1); //draws anopther part of the golf course
+		drawShape(GolfCoursePos,GolfCourse);				//draws most of the golf course
+		drawShape(GolfCourseExtra1Pos,GolfCourseExtra1);	//draws anopther part of the golf course
 		drawShape(GolfCourseExtra2Pos,GolfCourseExtra2);	//and draws the last part of the gold course
-		drawShape(HoleWinPos,HoleWin);		//draws the final hole
+		drawShape(HoleWinPos,HoleWin);						//draws the final hole
 		drawShape(HoleWinCollisionPos,HoleWinCollision);drawShape(HolePortal1Pos,HolePortal1); //draw the hidden collision for final hole
 		drawShape(HoleCollision1Pos,HoleCollision1);		//draws the...
 		drawShape(HolePortal2Pos,HolePortal2);				//portal holes...
@@ -1032,7 +991,7 @@ void draw()
 		drawText(16.6,15.2,"Hit F1 for help.");				//draws text, telling user how to access the help menu, in the white.
 	}
 
-	if((CanMove==true)&&(Help==false))					//if the ball is still, the user isn't holding the space key and the user isn't in the help menu then the direction arrow will be drawn and shown on screen in the same place as the ball
+	if((CanMove==true)&&(Help==false))						//if the ball is still, the user isn't holding the space key and the user isn't in the help menu then the direction arrow will be drawn and shown on screen in the same place as the ball
 	{
 		glLineWidth(2.0);
 		setColour(0.0f, 1.0f, 0.0f);
@@ -1099,7 +1058,7 @@ void draw()
 		drawText(-7.5f,6.0f,"_____________");
 		drawText(-8.0f,5.2f,"- The aim of the game is to get your ball into the final hole (the black one)");
 		drawText(-8.0f,4.4f,"  in as few strokes as possible (Therefore, the lower your score, the better).");
-		drawText(-8.0f,3.6f,"- Your score is deterined by how many strokes, it takes you to get your ball");
+		drawText(-8.0f,3.6f,"- Your score is determined by how many strokes, it takes you to get your ball");
 		drawText(-8.0f,2.8f,"	into the hole, minus the course's set par.");
 		drawText(-8.0f,2.0f,"- For this course par is 5.");
 		drawText(-8.0f,1.2f,"- Par is the number of strokes a good player should normally require for a course.");

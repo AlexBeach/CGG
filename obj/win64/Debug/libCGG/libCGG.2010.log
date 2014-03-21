@@ -1,0 +1,73 @@
+﻿Build started 20/03/2014 21:16:39.
+     1>Project "H:\Desktop\Alex Noon's CGG Assignment\CGG\libCGG\libCGG.2010.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\libCGG.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /I./include/ /I./src/freeglut/include/ /Zi /nologo /W4 /WX- /MP /Od /Oi /D WIN64 /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:fast /fp:except- /Zc:wchar_t /Zc:forScope /Fo"H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\\" /Fd"H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ./src/freeglut/src/freeglut_callbacks.c ./src/freeglut/src/freeglut_cursor.c ./src/freeglut/src/freeglut_display.c ./src/freeglut/src/freeglut_ext.c ./src/freeglut/src/freeglut_font.c ./src/freeglut/src/freeglut_font_data.c ./src/freeglut/src/freeglut_gamemode.c ./src/freeglut/src/freeglut_geometry.c ./src/freeglut/src/freeglut_glutfont_definitions.c ./src/freeglut/src/freeglut_init.c ./src/freeglut/src/freeglut_input_devices.c ./src/freeglut/src/freeglut_joystick.c ./src/freeglut/src/freeglut_main.c ./src/freeglut/src/freeglut_menu.c ./src/freeglut/src/freeglut_misc.c ./src/freeglut/src/freeglut_overlay.c ./src/freeglut/src/freeglut_spaceball.c ./src/freeglut/src/freeglut_state.c ./src/freeglut/src/freeglut_stroke_mono_roman.c ./src/freeglut/src/freeglut_stroke_roman.c ./src/freeglut/src/freeglut_structure.c ./src/freeglut/src/freeglut_teapot.c ./src/freeglut/src/freeglut_videoresize.c ./src/freeglut/src/freeglut_window.c ./src/freeglut/src/freeglut_xinput.c
+         freeglut_callbacks.c
+         freeglut_cursor.c
+         freeglut_display.c
+         freeglut_ext.c
+         freeglut_font.c
+         freeglut_font_data.c
+         freeglut_gamemode.c
+         freeglut_geometry.c
+         freeglut_glutfont_definitions.c
+         freeglut_init.c
+         freeglut_input_devices.c
+         freeglut_joystick.c
+         freeglut_main.c
+         freeglut_menu.c
+         freeglut_misc.c
+         freeglut_overlay.c
+         freeglut_spaceball.c
+         freeglut_state.c
+         freeglut_stroke_mono_roman.c
+         freeglut_stroke_roman.c
+         freeglut_structure.c
+         freeglut_teapot.c
+         freeglut_videoresize.c
+         freeglut_window.c
+         freeglut_xinput.c
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /I./include/ /I./src/freeglut/include/ /Zi /nologo /W4 /WX- /MP /Od /Oi /D WIN64 /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:fast /fp:except- /Zc:wchar_t /Zc:forScope /Fo"H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\\" /Fd"H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ./src/Graphics.cpp ./src/Transforms.cpp ./src/Window.cpp
+         Graphics.cpp
+         Transforms.cpp
+         Window.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\Lib.exe /OUT:"H:\Desktop\Alex Noon's CGG Assignment\CGG\\lib\win64\Debug\libCGG.lib" /NOLOGO "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_callbacks.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_cursor.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_display.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_ext.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_font.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_font_data.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_gamemode.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_geometry.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_glutfont_definitions.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_init.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_input_devices.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_joystick.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_main.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_menu.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_misc.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_overlay.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_spaceball.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_state.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_stroke_mono_roman.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_stroke_roman.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_structure.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_teapot.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_videoresize.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_window.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\freeglut_xinput.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\Graphics.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\Transforms.obj"
+         "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\Window.obj"
+         libCGG.2010.vcxproj -> H:\Desktop\Alex Noon's CGG Assignment\CGG\\lib\win64\Debug\libCGG.lib
+       FinalizeBuildStatus:
+         Deleting file "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\libCGG.unsuccessfulbuild".
+         Touching "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\libCGG\libCGG.lastbuildstate".
+     1>Done Building Project "H:\Desktop\Alex Noon's CGG Assignment\CGG\libCGG\libCGG.2010.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:10.16

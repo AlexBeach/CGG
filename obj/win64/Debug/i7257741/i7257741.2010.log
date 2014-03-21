@@ -1,0 +1,32 @@
+﻿Build started 20/03/2014 21:16:49.
+     1>Project "H:\Desktop\Alex Noon's CGG Assignment\CGG\i7257741\i7257741.2010.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\i7257741\i7257741.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /I../libCGG/include/ /Zi /nologo /W4 /WX- /MP /Od /Oi /D WIN64 /D WIN32 /D _DEBUG /D _WINDOWS /D _CONSOLE /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:fast /fp:except- /Zc:wchar_t /Zc:forScope /Fo"H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\i7257741\\" /Fd"H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\i7257741\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ./main.cpp
+         main.cpp
+     1>./main.cpp(535): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>./main.cpp(541): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>./main.cpp(568): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>./main.cpp(662): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>./main.cpp(671): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>./main.cpp(680): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>./main.cpp(730): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>./main.cpp(783): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>./main.cpp(836): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>./main.cpp(889): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>h:\desktop\alex noon's cgg assignment\cgg\i7257741\main.cpp(57): warning C4715: 'FindIntersect' : not all control paths return a value
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"H:\Desktop\Alex Noon's CGG Assignment\CGG\\bin\win64\Debug\i7257741.exe" /NOLOGO /LIBPATH:"H:\Desktop\Alex Noon's CGG Assignment\CGG\\lib\win64\Debug\\" libCGG.lib /MANIFEST /ManifestFile:"H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\i7257741\i7257741.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"H:\Desktop\Alex Noon's CGG Assignment\CGG\bin\win64\Debug\i7257741.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\Desktop\Alex Noon's CGG Assignment\CGG\\lib\win64\Debug\i7257741.lib" /MACHINE:X64 "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\i7257741\main.obj"
+         LINK : H:\Desktop\Alex Noon's CGG Assignment\CGG\\bin\win64\Debug\i7257741.exe not found or not built by the last incremental link; performing full link
+         i7257741.2010.vcxproj -> H:\Desktop\Alex Noon's CGG Assignment\CGG\\bin\win64\Debug\i7257741.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"H:\Desktop\Alex Noon's CGG Assignment\CGG\\bin\win64\Debug\i7257741.exe;#1" /manifest "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\i7257741\i7257741.exe.intermediate.manifest"
+       FinalizeBuildStatus:
+         Deleting file "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\i7257741\i7257741.unsuccessfulbuild".
+         Touching "H:\Desktop\Alex Noon's CGG Assignment\CGG\\obj\win64\Debug\i7257741\i7257741.lastbuildstate".
+     1>Done Building Project "H:\Desktop\Alex Noon's CGG Assignment\CGG\i7257741\i7257741.2010.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.22
